@@ -28,11 +28,6 @@ export default new Router({
       component: RegisterPage
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginPage
-    },
-    {
       path: '/view',
       name: 'anonymous-view',
       component: MapView
