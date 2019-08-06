@@ -17,7 +17,7 @@
       <b-form-group id="input-group-3" label="Confirm Password:" label-for="input-3">
         <b-form-input id="input-3" v-model="regForm.confirmPassword" type="password" required />
       </b-form-group>
-      <b-button />
+      <b-button>Create Account</b-button>
     </b-form>
   </div>
 </template>

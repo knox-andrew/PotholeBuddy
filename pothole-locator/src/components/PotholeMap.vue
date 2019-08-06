@@ -15,14 +15,13 @@ v-for="(m, index) in markers"
 @dblclick="center=m.position"
 @click="toggleInfo(m, index)" ></gmap-marker> 
  
-  <gmap-info-window
+<gmap-info-window
  :options="infoOptions"
  :position="infoPosition"
  :opened="infoOpened"
  :content="infoContent"
-@closeclick="infoOpened=false">
-
- </gmap-info-window>
+ @closeclick="infoOpened=false">
+</gmap-info-window>
 
 </gmap-map>
 </template>
