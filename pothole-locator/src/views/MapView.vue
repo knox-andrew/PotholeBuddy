@@ -6,15 +6,19 @@
 
     <div id="form">
       <h1>form or whatever goes here</h1>
+      <user-form></user-form>
     </div>
   </div>
 </template>
 
 <script>
 import PotholeMap from '@/components/PotholeMap.vue'
+import UserForm from '@/components/UserForm.vue'
+
 export default{
     components: {
-        PotholeMap
+        PotholeMap,
+        UserForm
     },
     }
 </script>
