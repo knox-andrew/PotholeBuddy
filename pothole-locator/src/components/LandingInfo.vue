@@ -1,8 +1,19 @@
 <template>
-    <div>
-     <h1>Welcome To Our Pothole Locator</h1>
-     <p>This is a page dedicated to preventing automotive mishaps caused by pesky potholes.</p>
-     <p>If you just wish to view potholes and not report any then continue as an anonymous user to this <router-link :to="{name: 'anonymous-view'}">View Map</router-link></p>
+    <div id="content">
+
+    <h1 id="welcome">Welcome to our Pothole Locator Application</h1>
+    <h2 id="info">
+         This is an application dedicated to preventing automotive mishaps caused by pesky potholes. <br>
+         With this application, anyone can view reported potholes in their area, and logged in users can report potholes they find along their travels for anyone to view, and avoid.
+    </h2>
+    <p>
+        If you wish to view potholes, you may 
+        <router-link :to="{name: 'anonymous-view'}">continue as an anonymous user</router-link>.
+        <br> <br> Otherwise, you may 
+        <router-link :to="{name: 'login'}">login</router-link> or 
+        <router-link :to="{name: 'register'}">register for a free account</router-link> 
+        to contribute, and report any potholes you find.
+    </p>
     
     </div>
 </template>
@@ -14,5 +25,9 @@ export default {
 </script>
 
 <style>
+
+#content {
+    margin: 30px;
+}
 
 </style>
