@@ -2,7 +2,7 @@
 <gmap-map
 :center="center"
 :zoom="7"
-style="width: 500px; height: 300px"
+style="width: 600px; height: 675px"
 @click="addMarker"
 >
 <gmap-marker
@@ -12,6 +12,7 @@ v-for="(m, index) in markers"
 :clickable="true"
 :draggable="true"
 @click="center=m.position"
+@dblclick="showInfo"
 ></gmap-marker>
 </gmap-map>
 </template>
@@ -24,7 +25,7 @@ Vue2.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyDgZpARagOEw8JfMFmUVHDYwfldSM3-7NE',
         v: '3.',
-     libraries: 'places', //// If you need to use place input
+        libraries: 'places', //// If you need to use place input
     }
 });
 
@@ -41,6 +42,11 @@ export default {
             const lat = event.latLng.lat();
             const lng = event.latLng.lng();
             this.markers.push({position: {lat: lat, lng: lng}});
+        },
+        removeMarker(event) {
+            const lat = event.latLng.lat();
+            const lng = event.latLng.lng();
+            this.markers.pop({position: {lat: lat, lng: lng}});
         }
     }
 }

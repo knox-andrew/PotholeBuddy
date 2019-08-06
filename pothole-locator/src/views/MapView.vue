@@ -1,7 +1,6 @@
 <template>
   <div id="container">
     <div id="map">
-        <h1>Map goes here</h1>
         <pothole-map></pothole-map>
     </div>
 
@@ -22,16 +21,19 @@ export default{
 
 <style>
 
+* {
+    text-align: center;
+}
 #container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 #map {
-    padding: 10px;
+    padding: 30px;
 }
 #form {
-    padding: 10px;
+    padding: 30px;
 }
 #map {
     height: 100%;
