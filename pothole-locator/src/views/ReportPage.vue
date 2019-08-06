@@ -1,11 +1,11 @@
 <template>
   <div class="content" id="container">
     <div id="map">
-        <pothole-map></pothole-map>
+        <pothole-map v-on:mapClicked="mapClicked($event)" :markers="markers"></pothole-map>
     </div>
 
     <div id="form">
-      <user-form></user-form>
+      <user-form v-if="showForm" v-on:wasCanceled="removeMarker"></user-form>
     </div>
   </div>
 </template>
@@ -15,11 +15,27 @@ import PotholeMap from '@/components/PotholeMap.vue'
 import UserForm from '@/components/UserForm.vue'
 
 export default{
+    data() {
+        return {
+            showForm: false,
+            markers: []
+        }
+    },
     components: {
         PotholeMap,
         UserForm
     },
-    }
+    methods: {
+        mapClicked(marker) {
+            this.showForm = true;
+            this.markers.push({position: marker});
+        },
+        removeMarker() {
+            this.showForm=false;
+            this.markers.pop();
+        }
+    },
+}
 </script>
 
 <style>
