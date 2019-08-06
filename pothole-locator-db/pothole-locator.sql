@@ -26,8 +26,6 @@ CREATE TABLE markers
     CONSTRAINT fk_marker_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-COMMIT TRANSACTION;
-
 
 INSERT INTO users (email, password, role) 
 VALUES ('test1@email.com', 'testpass1', 'user');
@@ -38,7 +36,6 @@ VALUES ('test2@email.com', 'testpass2', 'user');
 INSERT INTO users (email, password, role) 
 VALUES ('test3@email.com', 'testpass3', 'user');
 
-SELECT * FROM users;
 
 INSERT INTO markers (latitude, longitude, rating, comments, user_id) 
 VALUES ('39.193684289509065', '-84.32208179208072', 'moderate', 
@@ -52,7 +49,7 @@ INSERT INTO markers (latitude, longitude, rating, comments, user_id)
 VALUES ('39.22214908061195', '-84.36568378182682', 'critical', 
         'Very deep and covers almost half the road. Cracked 2 of my rims', 1);
 
-SELECT * FROM markers;
+COMMIT TRANSACTION;
 
 
 -- SELECT marker_id, latitude, longitude, rating, comments, user_id 
