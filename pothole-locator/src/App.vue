@@ -19,10 +19,14 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: url("https://i.pinimg.com/originals/5f/c2/9c/5fc29ce899168b5abd2fb8faea9726f4.jpg");
+  color: black;
 }
 .content {
-  width:800px;
-  margin: 20px auto !important;
+  background-color: rgba(200,200,200,0.7);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
 }
 header {
   background-color: #E34232;

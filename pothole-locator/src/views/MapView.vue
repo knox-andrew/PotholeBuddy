@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div class="content" id="container">
     <div id="map">
         <pothole-map></pothole-map>
     </div>
@@ -31,12 +31,12 @@ export default{
 }
 #map {
     padding: 30px;
+    height: 100%;
+    width: 45%;
 }
 #form {
     padding: 30px;
-}
-#map {
-    height: 100%;
+    width: 45%;
 }
 
 </style>
