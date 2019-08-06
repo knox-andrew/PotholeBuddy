@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-form>
+    <b-form @submit.prevent="submitForm">
       <b-form-group id="input-group-1" label="Email:" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -11,22 +11,13 @@
         />
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Confirm Email:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="regForm.confirmEmail"
-          type="email"
-          required
-          placeholder
-        />
+      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+        <b-form-input id="input-2" v-model="regForm.password" type="password" required />
       </b-form-group>
-
-      <b-form-group id="input-group-3" label="Password:" label-for="input-3">
-        <b-form-input id="input-3" v-model="regForm.password" type="password" required />
+      <b-form-group id="input-group-3" label="Confirm Password:" label-for="input-3">
+        <b-form-input id="input-3" v-model="regForm.confirmPassword" type="password" required />
       </b-form-group>
-      <b-form-group id="input-group-4" label="Confirm Password:" label-for="input-4">
-        <b-form-input id="input-4" v-model="regForm.confirmPassword" type="password" required />
-      </b-form-group>
+      <b-button />
     </b-form>
   </div>
 </template>
@@ -37,11 +28,15 @@ export default {
     return {
       regForm: {
         email: "",
-        confirmEmail: "",
         password: "",
         confirmPassword: ""
       }
     };
+  },
+  methods: {
+    submitForm() {
+      JSON.stringify(this.regForm);
+    }
   }
 };
 </script>
