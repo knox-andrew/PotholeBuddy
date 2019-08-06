@@ -1,29 +1,42 @@
 <template>
     <div>
-        <form action="submit">
+        <h2>Pothole Report Form</h2>
+        <b-form>
+            <b-form-group label="Severity Level" label-for="severity">
+                <b-form-select value="severity" id="severity">
+                    <option value="minor">Minor</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="serious">Serious</option>
+                    <option value="severe">Severe</option>
+                    <option value="critcal">Critical</option>
+                </b-form-select>
+            </b-form-group>
+            <b-form-group label="Comments" label-for="comments">
+                <b-form-input type="text" placeholder="additional comments..." id="comments"/>
+            </b-form-group>
             <div>
-                <select value="severity">
-                    <option value="1-bad">Minor</option>
-                    <option value="2-bad">Moderate</option>
-                    <option value="3-bad">Severe</option>
-                    <option value="4-bad">Serious</option>
-                    <option value="5-bad">Critical</option>
-                </select>
+                <button type="submit" @click="addMarker"> Submit Report</button>
             </div>
-            <div>
-                <input type="text" placeholder="additional comments...">
-            </div>
-            <div>
-                <button type="submit"> Submit Report</button>
-            </div>
-        </form>
+        </b-form>
     </div>
 </template>
 
 <script>
-export default {
-
-}
+    export default {
+        data () {
+            return {
+                center: {lat: 39.151898, lng: -84.4676563},
+                markers: []
+            }
+        },
+        methods: {
+            addMarker(event) {
+                const lat = event.latLng.lat();
+                const lng = event.latLng.lng();
+                this.markers.push({position: {lat: lat, lng: lng}});
+            }
+        }
+    }
 </script>
 
 <style>

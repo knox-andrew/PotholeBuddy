@@ -3,22 +3,15 @@
     <div id="map">
         <pothole-map></pothole-map>
     </div>
-
-    <div id="form">
-      <h1>form or whatever goes here</h1>
-      <user-form></user-form>
-    </div>
   </div>
 </template>
 
 <script>
 import PotholeMap from '@/components/PotholeMap.vue'
-import UserForm from '@/components/UserForm.vue'
 
 export default{
     components: {
         PotholeMap,
-        UserForm
     },
     }
 </script>
@@ -36,11 +29,7 @@ export default{
 #map {
     padding: 30px;
     height: 100%;
-    width: 45%;
-}
-#form {
-    padding: 30px;
-    width: 45%;
+    width: 100%;
 }
 
 </style>

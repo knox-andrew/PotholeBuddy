@@ -11,8 +11,8 @@ v-for="(m, index) in markers"
 :position="m.position"
 :clickable="true"
 :draggable="true"
-@click="center=m.position"
-@dblclick="showInfo"
+@dblclick="center=m.position"
+@click="showInfo"
 ></gmap-marker>
 </gmap-map>
 </template>
