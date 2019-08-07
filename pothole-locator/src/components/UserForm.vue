@@ -15,7 +15,7 @@
                 <b-form-input type="text" placeholder="additional comments..." id="comments"/>
             </b-form-group>
             <div>
-                <button type="submit" @click="addMarker"> Submit Report</button>
+                <button type="submit" @click.prevent="$emit('submitted')"> Submit Report</button>
                 <button @click.prevent="$emit('wasCanceled')">Cancel</button>
             </div>
         </b-form>

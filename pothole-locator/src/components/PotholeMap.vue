@@ -10,8 +10,8 @@ style="width: 600px; height: 600px"
         {{infoContent}}
       </gmap-info-window>
 
-      <gmap-marker :key="i" v-for="(m,i) 
-      in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)">
+      <gmap-marker :key="i" v-for="(m,i) in markers" 
+        :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)">
       </gmap-marker>
 </gmap-map>
 
@@ -52,7 +52,6 @@ export default {
         lng: event.latLng.lng()
       };
       this.$emit("mapClicked", marker);
-      this.$emit("formShowing", this.infoWinOpen);
     },
     removeMarker(event) {
       const lat = event.latLng.lat();

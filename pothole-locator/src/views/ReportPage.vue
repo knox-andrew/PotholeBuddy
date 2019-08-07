@@ -5,7 +5,7 @@
     </div>
 
     <div id="form">
-      <user-form v-if="showForm" v-on:wasCanceled="removeMarker($event)"></user-form>
+      <user-form v-if="showForm" v-on:wasCanceled="removeMarker" v-on:submitted="addMarker"></user-form>
     </div>
   </div>
 </template>
@@ -18,7 +18,8 @@ export default{
     data() {
         return {
             showForm: false,
-            markers: []
+            markers: [],
+            mPosition: Object
         }
     },
     components: {
@@ -27,13 +28,16 @@ export default{
     },
     methods: {
         mapClicked(marker) {
+            this.mPosition = marker;
             this.showForm = true;
-            this.markers.push({position: marker});
         },
-        removeMarker(infoWinOpen) {
+        removeMarker() {
             this.showForm=false;
             this.markers.pop();
-            infoWinOpen = false;
+        },
+        addMarker() {
+            this.markers.push({position: this.mPosition});
+            this.showForm = false;
         }
     },
 }
