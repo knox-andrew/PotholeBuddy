@@ -30,7 +30,12 @@ public class MarkerController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public String create(@RequestBody Marker marker) {
-		return "Success";
+	public Marker create(@RequestBody Marker marker) {
+		return markerDao.create(
+				marker.getUserId(), 
+				marker.getLatitude(), 
+				marker.getLongitude(), 
+				marker.getRating(), 
+				marker.getComments());
 	}
 }

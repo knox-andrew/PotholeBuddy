@@ -57,13 +57,18 @@ public class JdbcMarkerDao implements MarkerDao {
 	public Marker create(long userId, String latitude, String longitude, String rating, String comments) {
 		
 		String sql = "INSERT INTO markers (user_id, latitude, longitude, rating, comments) "
-				+ "VALUES(?, ?, ?, ?, ?)";
+				+ "VALUES(?, ?, ?, ?, ?) RETURNING id";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, latitude, longitude, rating, comments);
-		
 		Marker m = null;
 		if(results.next()) {
-			m = mapRowToMarker(results);
+			m = new Marker();
+			m.setId(results.getLong("id"));
+			m.setUserId(userId);
+			m.setLatitude(latitude);
+			m.setLongitude(longitude);
+			m.setRating(rating);
+			m.setComments(comments);
 		}
 		
 		return m;
