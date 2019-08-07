@@ -5,7 +5,7 @@
     </div>
 
     <div id="form">
-      <user-form v-if="showForm" v-on:wasCanceled="removeMarker"></user-form>
+      <user-form v-if="showForm" v-on:wasCanceled="removeMarker($event)"></user-form>
     </div>
   </div>
 </template>
@@ -30,9 +30,10 @@ export default{
             this.showForm = true;
             this.markers.push({position: marker});
         },
-        removeMarker() {
+        removeMarker(infoWinOpen) {
             this.showForm=false;
             this.markers.pop();
+            infoWinOpen = false;
         }
     },
 }

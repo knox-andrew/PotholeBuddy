@@ -3,10 +3,10 @@
 <gmap-map
 :center="center"
 :zoom="7"
-style="width: 600px; height: 675px"
+style="width: 600px; height: 600px"
 @click="mapClicked"
 >
- <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
+      <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
         {{infoContent}}
       </gmap-info-window>
 
@@ -51,8 +51,8 @@ export default {
         lat: event.latLng.lat(),
         lng: event.latLng.lng()
       };
-      //this.markers.push({ position: marker });
       this.$emit("mapClicked", marker);
+      this.$emit("formShowing", this.infoWinOpen);
     },
     removeMarker(event) {
       const lat = event.latLng.lat();
@@ -61,7 +61,6 @@ export default {
     },
     toggleInfoWindow: function(marker, idx) {
       this.infoWindowPos = marker.position;
-      this.infoContent = marker.infoText;
 
       //check if its the same marker that was selected if yes toggle
       if (this.currentMidx == idx) {
