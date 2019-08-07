@@ -32,7 +32,6 @@ export default {
       map: null,
       mapLoaded: false,
       center: { lat: 39.151898, lng: -84.4676563 },
-      
       infoPosition: null,
       infoContent: null,
       infoOpened: false,
