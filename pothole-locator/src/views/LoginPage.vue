@@ -1,16 +1,14 @@
 <template>
-<div>
-    <form action="Submit">
-        <input type="text">
-        <input type="text">
-        <button type="submit">Submit</button>
-        </form>
-    </div>
+<login-form/>
 </template>
 
 <script>
-export default {
+import LoginForm from '@/components/LoginForm.vue'
 
+export default {
+    components:{
+        LoginForm
+    }
 }
 </script>
 

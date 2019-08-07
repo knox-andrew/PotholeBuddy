@@ -11,10 +11,18 @@
       
     </ul>
     </nav>
-    <router-view/>
+    <router-view :apiURL="API_URL"/>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      API_URL: 'http://localhost:8080/AuthenticationApplication/api/'
+    }
+  }  
+}
+</script>
 <style>
 body {
   margin: 0;
