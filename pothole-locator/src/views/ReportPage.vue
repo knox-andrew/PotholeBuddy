@@ -1,7 +1,7 @@
 <template>
   <div class="content" id="container">
     <div id="map">
-        <pothole-map v-on:mapClicked="mapClicked($event)" :markers="markers"></pothole-map>
+        <pothole-map v-bind:class="[formShowing ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers"></pothole-map>
     </div>
 
     <div id="form">
@@ -18,8 +18,11 @@ export default{
     data() {
         return {
             showForm: false,
+            formShowing: false,
             markers: [],
-            mPosition: Object
+            mPosition: Object,
+            rating: '',
+            comments: ''
         }
     },
     components: {
@@ -30,14 +33,20 @@ export default{
         mapClicked(marker) {
             this.mPosition = marker;
             this.showForm = true;
+            this.formShowing = true;
         },
         removeMarker() {
-            this.showForm=false;
-            this.markers.pop();
-        },
-        addMarker() {
-            this.markers.push({position: this.mPosition});
             this.showForm = false;
+            this.formShowing = false;
+        },
+        addMarker(formData) {
+            this.markers.push({
+                position: this.mPosition,
+                rating: formData.rating,
+                comments: formData.comments
+            });
+            this.showForm = false;
+            this.formShowing = false;
         }
     },
 }
@@ -61,6 +70,14 @@ export default{
 #form {
     padding: 30px;
     width: 45%;
+}
+.fullScreen {
+    height: 600px;
+    width: 1225px;
+}
+.halfMap {
+    height: 600px;
+    width: 600px;
 }
 
 </style>

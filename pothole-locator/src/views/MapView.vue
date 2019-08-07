@@ -1,7 +1,7 @@
 <template>
   <div class="content" id="container">
     <div id="map">
-        <pothole-map></pothole-map>
+        <pothole-map style="width: 1225px; height: 600px"></pothole-map>
     </div>
   </div>
 </template>

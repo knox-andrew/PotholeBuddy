@@ -3,8 +3,8 @@
         <h2>Pothole Report Form</h2>
         <b-form>
             <b-form-group label="Severity Level" label-for="severity">
-                <b-form-select value="severity" id="severity">
-                    <option value="minor">Minor</option>
+                <b-form-select v-model="severity" id="severity">
+                    <option value="Minor">Minor</option>
                     <option value="moderate">Moderate</option>
                     <option value="serious">Serious</option>
                     <option value="severe">Severe</option>
@@ -12,12 +12,12 @@
                 </b-form-select>
             </b-form-group>
             <b-form-group label="Comments" label-for="comments">
-                <b-form-input type="text" placeholder="additional comments..." id="comments"/>
+                <b-form-input type="text" placeholder="additional comments..." id="comments" v-model="comments"/>
             </b-form-group>
-            <div>
-                <button type="submit" @click.prevent="$emit('submitted')"> Submit Report</button>
+            <b-form-group label="Report Pothole?">
+                <button type="submit" @click.prevent="emitForm">Submit Report</button>
                 <button @click.prevent="$emit('wasCanceled')">Cancel</button>
-            </div>
+            </b-form-group>
         </b-form>
     </div>
 </template>
@@ -27,14 +27,18 @@
         data () {
             return {
                 center: {lat: 39.151898, lng: -84.4676563},
-                markers: []
+                markers: [],
+                severity: '',
+                comments: ''
             }
         },
         methods: {
-            addMarker(event) {
-                const lat = event.latLng.lat();
-                const lng = event.latLng.lng();
-                this.markers.push({position: {lat: lat, lng: lng}});
+            emitForm() {
+                const formData = {
+                    rating: this.severity,
+                    comments: this.comments
+                }
+                this.$emit("submitted", formData);
             }
         }
     }
