@@ -35,7 +35,8 @@ export default {
       regForm: {
         username: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        role: "user"
       }
     };
   },
@@ -44,7 +45,7 @@ export default {
       JSON.stringify(this.regForm);
     },
      createUser() {
-      fetch( this.apiURL,{
+      fetch( this.apiURL + "register",{
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
