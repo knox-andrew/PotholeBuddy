@@ -7,13 +7,13 @@ INSERT INTO users ("id", "username", "password", "salt", "role") VALUES
 'user');
 
 INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (0, '39.193684289509065', '-84.32208179208072', 'moderate', 
+VALUES (1, '39.193684289509065', '-84.32208179208072', 'moderate', 
         'Not too bad. Located on the left side of the road.');
 
 INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (0, '39.22214908061195', '-84.36568378182682', 'severe', 
+VALUES (1, '39.22214908061195', '-84.36568378182682', 'severe', 
         'Fairly deep and in the middle of the road. Definitely avoid.');
 
 INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (0, '39.22214908061195', '-84.36568378182682', 'critical', 
+VALUES (1, '39.22214908061195', '-84.36568378182682', 'critical', 
         'Very deep and covers almost half the road. Cracked 2 of my rims');
