@@ -16,7 +16,7 @@
             </b-form-group>
             <div>
                 <button type="submit" @click="addMarker"> Submit Report</button>
-                <button @click.prevent="$emit('wasCanceled')"/>
+                <button @click.prevent="$emit('wasCanceled')">Cancel</button>
             </div>
         </b-form>
     </div>
