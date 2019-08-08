@@ -43,7 +43,7 @@ const router = new Router({
       name: 'anonymous-view',
       component: MapView,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
