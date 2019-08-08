@@ -54,7 +54,7 @@ public class JdbcMarkerDao implements MarkerDao {
 	}
 	
 	@Override
-	public Marker create(long userId, String latitude, String longitude, String rating, String comments) {
+	public Marker create(long userId, double latitude, double longitude, String rating, String comments) {
 		
 		String sql = "INSERT INTO markers (user_id, latitude, longitude, rating, comments) "
 				+ "VALUES(?, ?, ?, ?, ?) RETURNING id";
@@ -75,12 +75,12 @@ public class JdbcMarkerDao implements MarkerDao {
 	}
 	
 	@Override
-	public Marker update(long id, long userId, String latitude, String longitude, String rating, String comments) {
+	public Marker update(long id, long userId, double latitude, double longitude, String rating, String comments) {
 		String sql = "UPDATE markers "
 				+ "SET user_id = ?, latitude = ?, longitude = ?, rating = ?, comments = ? "
 				+ "WHERE id = ?";
 		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, latitude, longitude, rating, comments, id);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, Double.toString(latitude), Double.toString(longitude), rating, comments, id);
 		
 		Marker m = null;
 		if(results.next()) {
@@ -94,8 +94,8 @@ public class JdbcMarkerDao implements MarkerDao {
 		Marker m = new Marker();
 		m.setId(row.getLong("id"));
 		m.setUserId(row.getLong("user_id"));
-		m.setLatitude(row.getString("latitude"));
-		m.setLongitude(row.getString("longitude"));
+		m.setLatitude(Double.parseDouble(row.getString("latitude")));
+		m.setLongitude(Double.parseDouble(row.getString("longitude")));
 		m.setRating(row.getString("rating"));
 		m.setComments(row.getString("comments"));
 		
