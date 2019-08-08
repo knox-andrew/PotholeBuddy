@@ -18,7 +18,7 @@
         <b-form-input id="input-3" v-model="regForm.confirmPassword" type="password" required />
       </b-form-group>
       
-      <b-button :disabled="!isValidForm" @click="createUser()" type="submit">Create Account</b-button>
+      <router-link :to="{name: 'login'}"> <b-button :disabled="!isValidForm" @click="createUser(), signOn()" type="submit">Create Account</b-button></router-link>
     </b-form>
   </div>
 </template>
@@ -26,12 +26,14 @@
 <script>
 
 export default {
+  
   props: {
     apiURL: String,
     userId: Number
   },
   data() {
     return {
+      signedIn: false,
       regForm: {
         username: "",
         password: "",
@@ -41,6 +43,7 @@ export default {
     };
   },
   methods: {
+    
     submitForm() {
       JSON.stringify(this.regForm);
     },
@@ -59,6 +62,10 @@ export default {
       })
       .catch((err) => console.error(err));
     },
+    signOn(){
+      this.signedIn = true;
+      <p>Welcome {{username: ""}}</p>
+    }
   },
   computed: {
     isValidForm() {
