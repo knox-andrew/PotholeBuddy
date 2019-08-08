@@ -16,7 +16,8 @@ import UserForm from '@/components/UserForm.vue'
 
 export default{
     props: {
-        apiURL: String
+        apiURL: String,
+        userId: Number
     },
     data() {
         return {
@@ -47,7 +48,7 @@ export default{
                 latitude: parseFloat(this.mPosition.latitude),
                 longitude: parseFloat(this.mPosition.longitude),
                 rating: formData.rating,
-                userId: 1
+                userId: this.userId
             }
 
             this.markers.push(marker);
