@@ -1,7 +1,7 @@
 <template>
   <div class="content" id="container">
     <div id="map">
-        <pothole-map v-bind:class="[formShowing ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers"></pothole-map>
+        <pothole-map v-bind:class="[formShowing ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers" :canReport="canReport"></pothole-map>
     </div>
 
     <div id="form">
@@ -22,7 +22,8 @@ export default{
             markers: [],
             mPosition: Object,
             rating: '',
-            comments: ''
+            comments: '',
+            canReport: true
         }
     },
     components: {
