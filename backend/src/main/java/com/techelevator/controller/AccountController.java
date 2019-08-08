@@ -34,7 +34,7 @@ public class AccountController {
     public String login(@RequestBody User user) throws UnauthorizedException {
         if(auth.signIn(user.getUsername(), user.getPassword())) {
             User currentUser = auth.getCurrentUser();
-            return tokenHandler.createToken(user.getUsername(), currentUser.getRole());
+            return tokenHandler.createToken(currentUser);
         } else {
             throw new UnauthorizedException();
         }
@@ -61,6 +61,11 @@ public class AccountController {
     @GetMapping("/users")
     public List<User> getUsers() {
     	return userDao.getAllUsers();
+    }
+    
+    @GetMapping("/user")
+    public User getCurrentUser() {
+    	return auth.getCurrentUser();
     }
 
 }

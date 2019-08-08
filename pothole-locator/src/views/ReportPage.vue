@@ -13,17 +13,18 @@
 <script>
 import PotholeMap from '@/components/PotholeMap.vue'
 import UserForm from '@/components/UserForm.vue'
+import auth from '@/auth.js'
 
 export default{
     props: {
-        apiURL: String,
-        userId: Number
+        apiURL: String
     },
     data() {
         return {
             showForm: false,
             markers: [],
             mPosition: Object,
+            currentUser: Object,
             rating: '',
             comments: '',
             canReport: true,
@@ -48,7 +49,7 @@ export default{
                 latitude: parseFloat(this.mPosition.latitude),
                 longitude: parseFloat(this.mPosition.longitude),
                 rating: formData.rating,
-                userId: this.userId
+                userId: auth.getUser().uid
             }
 
             this.markers.push(marker);

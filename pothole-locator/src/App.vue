@@ -7,7 +7,7 @@
       <router-link :to="{name: 'register'}" tag="li">Register</router-link>
       <router-link :to="{name: 'anonymous-view'}" tag="li">View Map</router-link>
       <router-link :to="{name: 'report'}" tag="li">Report View</router-link>
-      <router-link :to="{name: 'administrator'}" tag="li">Admin View</router-link>
+      <router-link v-if="isAdmin" :to="{name: 'administrator'}" tag="li">Admin View</router-link>
       
     </ul>
     </nav>
@@ -15,12 +15,21 @@
   </div>
 </template>
 <script>
+import auth from '@/auth.js'
+
 export default {
   data() {
     return {
       API_URL: 'http://localhost:8080/AuthenticationApplication/'
+     
     }
-  }  
+  },
+ computed: {
+   isAdmin() {
+      return auth.getUser().rol === 'admin';
+   }
+   
+ }
 }
 </script>
 <style>

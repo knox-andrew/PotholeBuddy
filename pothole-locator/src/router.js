@@ -19,7 +19,7 @@ const router = new Router({
       name: 'landing-page',
       component: LandingPage,
       meta: {
-      requiresAuth: true
+      requiresAuth: true,
     }
     },
     {
@@ -27,7 +27,7 @@ const router = new Router({
       name: 'login',
       component: LoginPage,
       meta: {
-      requiresAuth: false
+      requiresAuth: false,
     }
     },
     {
@@ -35,7 +35,7 @@ const router = new Router({
       name: 'register',
       component: RegisterPage,
       meta: {
-      requiresAuth: false
+      requiresAuth: false,
     }
     },
     {
@@ -43,7 +43,7 @@ const router = new Router({
       name: 'anonymous-view',
       component: MapView,
       meta: {
-        requiresAuth: false
+        requiresAuth: false,
       }
     },
     {
@@ -51,7 +51,7 @@ const router = new Router({
       name: 'report',
       component: ReportPage,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
       }
     },
     {
@@ -68,14 +68,15 @@ router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const user = auth.getUser();
-
-  // If it does and they are not logged in, send the user to "/login"
-  if (requiresAuth && !user) {
+  const adUser = auth.getUser().rol === "admin";
+  
+                                  // If it does and they are not logged in, send the user to "/login"
+   if (requiresAuth && !user) {
     next("/login");
-  } else {
-    // Else let them go to their next destination
+  } else if(requiresAuth && !adUser) {
+   next("/login");
+  }else {
     next();
   }
 });
-
 export default router;
