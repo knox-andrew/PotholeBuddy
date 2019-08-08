@@ -47,8 +47,10 @@ export default{
                 comments: formData.comments,
                 latitude: parseFloat(this.mPosition.latitude),
                 longitude: parseFloat(this.mPosition.longitude),
+
                 rating: formData.rating,
                 userId: this.userId
+
             }
 
             this.markers.push(marker);
