@@ -90,6 +90,7 @@ public class JdbcMarkerDao implements MarkerDao {
 		return m;
 	}
 	
+	
 	private Marker mapRowToMarker(SqlRowSet row) {
 		Marker m = new Marker();
 		m.setId(row.getLong("id"));

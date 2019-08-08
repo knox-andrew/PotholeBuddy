@@ -65,6 +65,9 @@ export default {
         this.currentMidx = idx;
       }
     }
+  },
+  created() {
+    //document.addEventListener('DOMContentLoaded')
   }
 };
 </script>

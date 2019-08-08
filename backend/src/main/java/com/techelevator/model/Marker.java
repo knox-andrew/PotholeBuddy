@@ -1,12 +1,14 @@
 package com.techelevator.model;
 
 public class Marker {
+	
 	private long id;
 	private long userId;
 	private String latitude;
 	private String longitude;
 	private String rating;
 	private String comments;
+	
 	public long getId() {
 		return id;
 	}

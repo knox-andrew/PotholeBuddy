@@ -1,7 +1,7 @@
 <template>
   <div class="content" id="container">
     <div id="map">
-        <pothole-map v-bind:class="[formShowing ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers" :canReport="canReport"></pothole-map>
+        <pothole-map v-bind:class="[showForm ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers" :canReport="canReport"></pothole-map>
     </div>
 
     <div id="form">
@@ -15,15 +15,23 @@ import PotholeMap from '@/components/PotholeMap.vue'
 import UserForm from '@/components/UserForm.vue'
 
 export default{
+    props: {
+        apiURL: String
+    },
     data() {
         return {
             showForm: false,
-            formShowing: false,
             markers: [],
             mPosition: Object,
             rating: '',
             comments: '',
-            canReport: true
+            canReport: true,
+            marker: {
+                comments: this.comments,
+                latitude: this.mPosition.lat,
+                longitude: this.mPosition.lng,
+                rating: this.rating
+            }
         }
     },
     components: {
@@ -34,11 +42,9 @@ export default{
         mapClicked(marker) {
             this.mPosition = marker;
             this.showForm = true;
-            this.formShowing = true;
         },
         removeMarker() {
             this.showForm = false;
-            this.formShowing = false;
         },
         addMarker(formData) {
             this.markers.push({
@@ -46,10 +52,22 @@ export default{
                 rating: formData.rating,
                 comments: formData.comments
             });
+
+            fetch(this.apiURL + "markers", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(this.marker)
+            });
+
             this.showForm = false;
-            this.formShowing = false;
         }
     },
+    created() {
+        fetch(this.apiURL + "markers")
+            .then(response => response.json())
+            .then(parsedData => (this.markers = parsedData))
+            .catch(err => console.log(err));
+    }
 }
 </script>
 
