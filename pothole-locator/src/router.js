@@ -6,41 +6,76 @@ import RegisterPage from './views/RegisterPage.vue'
 import MapView from './views/MapView.vue'
 import ReportPage from './views/ReportPage.vue'
 import AdminPage from './views/AdminPage.vue'
+import auth from './auth'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
       name: 'landing-page',
-      component: LandingPage
+      component: LandingPage,
+      meta: {
+      requiresAuth: true
+    }
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginPage
+      component: LoginPage,
+      meta: {
+      requiresAuth: false
+    }
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterPage
+      component: RegisterPage,
+      meta: {
+      requiresAuth: false
+    }
     },
     {
       path: '/view',
       name: 'anonymous-view',
-      component: MapView
+      component: MapView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/report',
       name: 'report',
-      component: ReportPage
+      component: ReportPage,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/admin',
       name: 'administrator',
-      component: AdminPage
+      component: AdminPage,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  // Determine if the route requires Authentication
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  const user = auth.getUser();
+
+  // If it does and they are not logged in, send the user to "/login"
+  if (requiresAuth && !user) {
+    next("/login");
+  } else {
+    // Else let them go to their next destination
+    next();
+  }
+});
+
+export default router;

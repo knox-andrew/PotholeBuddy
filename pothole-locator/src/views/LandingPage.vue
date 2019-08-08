@@ -1,5 +1,7 @@
 <template>
 <div>
+    <p>You must be authenticated to see this. You are logged in as {{user.sub}}.</p>
+    <button @click="logout">logout</button>
 <landing-info/>
 </div>
     
@@ -8,12 +10,24 @@
 
 <script>
 import LandingInfo from '@/components/LandingInfo.vue'
-export default {
-      name: 'LandingPage',
-      components: {
-          LandingInfo
-      }
+import auth from '@/auth.js'
 
+export default {
+  name: 'home',
+  components: {
+      LandingInfo
+  },
+  data() {
+    return {
+      user: auth.getUser()
+    }
+  },
+  methods: {
+    logout() {
+      auth.logout();
+      this.$router.push('/login');
+    }
+  }
 }
 </script>
 

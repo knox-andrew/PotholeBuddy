@@ -32,6 +32,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     private JwtTokenHandler tokenHandler;
 
     public JwtAuthInterceptor() {
+    	
     }
 
     public JwtAuthInterceptor(List<String> excludedUrls) {
