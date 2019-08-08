@@ -1,34 +1,37 @@
 <template>
+  <gmap-map :center="center" :zoom="14" @click="mapClicked">
+    <gmap-info-window
+      :options="infoOptions"
+      :position="infoWindowPos"
+      :opened="infoWinOpen"
+      @closeclick="infoWinOpen=false"
+    >
+      Severity: {{severity}}
+      <br />
+      Additional Info: {{comments}}
+    </gmap-info-window>
 
-<gmap-map
-:center="center"
-:zoom="14"
-@click="mapClicked"
->
-      <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
-         Severity: {{severity}} <br>
-         Additional Info: {{comments}}
-      </gmap-info-window>
-
-      <gmap-marker :key="i" v-for="(m,i) in markers" 
-        :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)">
-      </gmap-marker>
-</gmap-map>
-
+    <gmap-marker
+      :key="i"
+      v-for="(m,i) in markers"
+      :position="getPosition(m)"
+      :clickable="true"
+      @click="toggleInfoWindow(m,i)"
+    ></gmap-marker>
+  </gmap-map>
 </template>
 
 <script>
-
 export default {
   props: {
     markers: Array,
     canReport: Boolean
   },
-  data () {
+  data() {
     return {
-      center: {lat: 39.151898, lng: -84.4676563},
-      severity: '',
-      comments: '',
+      center: { lat: 39.151898, lng: -84.4676563 },
+      severity: "",
+      comments: "",
       infoWindowPos: null,
       infoWinOpen: false,
       currentMidx: null,
@@ -42,17 +45,20 @@ export default {
     };
   },
   methods: {
+    getPosition(marker) {
+      return { lat: marker.latitude, lng: marker.longitude };
+    },
     mapClicked(event) {
       if (this.canReport) {
         const marker = {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng()
+          latitude: event.latLng.lat(),
+          longitude: event.latLng.lng()
         };
         this.$emit("mapClicked", marker);
       }
     },
     toggleInfoWindow: function(marker, idx) {
-      this.infoWindowPos = marker.position;
+      this.infoWindowPos = this.getPosition(marker);
       this.severity = marker.rating;
       this.comments = marker.comments;
       //check if its the same marker that was selected if yes toggle
