@@ -1,12 +1,11 @@
 <template>
-    <div>
+  <div>
     <form action="Submit">
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit" :disabled="!isValidForm" @click="getUser()">Submit</button>
-        </form>
-       
-    </div>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit" :disabled="!isValidForm" @click="getUser()">Submit</button>
+    </form>  
+  </div>
 </template>
 
 <script>
@@ -25,7 +24,7 @@ export default {
     },
     methods: {
         getUser() {
-      fetch( this.apiURL + "login",{
+      fetch( this.apiURL + "login", {
         method: 'GET',
         headers: {
           "Content-Type": "application/json"

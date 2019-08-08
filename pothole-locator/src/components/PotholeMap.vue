@@ -21,7 +21,8 @@
 
 export default {
   props: {
-    markers: Array
+    markers: Array,
+    canReport: Boolean
   },
   data () {
     return {
@@ -42,11 +43,13 @@ export default {
   },
   methods: {
     mapClicked(event) {
-      const marker = {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng()
-      };
-      this.$emit("mapClicked", marker);
+      if (this.canReport) {
+        const marker = {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng()
+        };
+        this.$emit("mapClicked", marker);
+      }
     },
     toggleInfoWindow: function(marker, idx) {
       this.infoWindowPos = marker.position;
