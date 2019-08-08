@@ -26,12 +26,6 @@ export default{
             rating: '',
             comments: '',
             canReport: true,
-            marker: {
-                comments: this.comments,
-                latitude: this.mPosition.lat,
-                longitude: this.mPosition.lng,
-                rating: this.rating
-            }
         }
     },
     components: {
@@ -47,22 +41,29 @@ export default{
             this.showForm = false;
         },
         addMarker(formData) {
-            this.markers.push({
-                position: this.mPosition,
+
+            const marker = {
+                comments: formData.comments,
+                latitude: parseFloat(this.mPosition.latitude),
+                longitude: parseFloat(this.mPosition.longitude),
                 rating: formData.rating,
-                comments: formData.comments
-            });
+                userId: 1
+            }
+
+            this.markers.push(marker);
 
             fetch(this.apiURL + "markers", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(this.marker)
+                body: JSON.stringify(marker)
             });
 
             this.showForm = false;
         }
     },
+     
     created() {
+        this.canReport = true;
         fetch(this.apiURL + "markers")
             .then(response => response.json())
             .then(parsedData => (this.markers = parsedData))
