@@ -1,5 +1,11 @@
 <template>
   <div class="content" id="container">
+    <h3>
+        Welcome to the reporting page. <br>
+        Each marker on the map represents a reported pothole.
+        You can click on a marker to view details about the pothole.
+        You can also click on the map where you would like to report a pothole.
+    </h3>
     <div id="map">
         <pothole-map v-bind:class="[showForm ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers" :canReport="canReport"></pothole-map>
     </div>
