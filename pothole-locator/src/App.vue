@@ -7,7 +7,7 @@
       <router-link :to="{name: 'register'}" tag="li">Register</router-link>
       <router-link :to="{name: 'anonymous-view'}" tag="li">View Map</router-link>
       <router-link :to="{name: 'report'}" tag="li">Report View</router-link>
-      <router-link v-if="isAdmin" :to="{name: 'administrator'}" tag="li">Admin View</router-link>
+      <router-link :to="{name: 'administrator'}" tag="li">Admin View</router-link>
       
     </ul>
     </nav>
