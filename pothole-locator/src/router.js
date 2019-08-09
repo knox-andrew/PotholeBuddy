@@ -69,10 +69,9 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const user = auth.getUser();
   
-  
-                                  // If it does and they are not logged in, send the user to "/login"
+  // If it does and they are not logged in, send the user to "/login"
    if (requiresAuth && !user) {
-    next("/login");
+    next("/login"); 
   }else {
     next();
   }
