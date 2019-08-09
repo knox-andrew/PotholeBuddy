@@ -1,6 +1,5 @@
 <template>
 <div>
-    <p>You must be authenticated to see this. You are logged in as {{user.sub}}.</p>
     <button @click="logout">logout</button>
 <landing-info/>
 </div>

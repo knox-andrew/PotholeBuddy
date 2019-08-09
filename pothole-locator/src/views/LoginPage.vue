@@ -1,5 +1,5 @@
 <template>
-  <div id="login" class="text-center">
+  <div id="login" class="content">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
@@ -18,6 +18,7 @@
         required
         autofocus
       />
+      <br>
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -27,8 +28,10 @@
         v-model="user.password"
         required
       />
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <br>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit">Sign in</button>
     </form>
   </div>
 </template>

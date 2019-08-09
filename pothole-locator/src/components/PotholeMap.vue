@@ -1,5 +1,5 @@
 <template>
-  <gmap-map :center="center" :zoom="12" @click="mapClicked">
+  <gmap-map :center="center" :zoom="11" @click="mapClicked">
     <gmap-info-window
       :options="infoOptions"
       :position="infoWindowPos"
