@@ -15,7 +15,7 @@
 import PotholeMap from '@/components/PotholeMap.vue'
 import UserForm from '@/components/UserForm.vue'
 import AdminForm from '@/components/AdminForm.vue'
-
+import auth from "@/auth.js"
 
 export default{
     props: {
@@ -66,11 +66,15 @@ export default{
     },
      
     created() {
-        this.canReport = true;
-        fetch(this.apiURL + "markers")
-            .then(response => response.json())
-            .then(parsedData => (this.markers = parsedData))
-            .catch(err => console.log(err));
+        if(auth.getUser().rol != "admin") {
+            this.$router.push("/login");
+        } else {
+            this.canReport = true;
+            fetch(this.apiURL + "markers")
+                .then(response => response.json())
+                .then(parsedData => (this.markers = parsedData))
+                .catch(err => console.log(err));
+        }
     }
 }
 </script>
