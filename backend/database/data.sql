@@ -6,6 +6,13 @@ INSERT INTO users ("username", "password", "salt", "role") VALUES
 'kidcasB0te7i0jK0fmRIGHSm0mYhdLTaiGkEAiEvLp7dAEHWnuT8n/5bd2V/mqjstQ198iImm1xCmEFu+BHyOz1Mf7vm4LILcrr17y7Ws40Xyx4FOCt8jD03G+jEafpuVJnPiDmaZQXJEpEfekGOvhKGOCtBnT5uatjKEuVWuDA=',
 'user');
 
+INSERT INTO users ("username", "password", "salt", "role") VALUES
+(
+'admin',
+'FjZDm+sndmsdEDwNtfr6NA==',
+'kidcasB0te7i0jK0fmRIGHSm0mYhdLTaiGkEAiEvLp7dAEHWnuT8n/5bd2V/mqjstQ198iImm1xCmEFu+BHyOz1Mf7vm4LILcrr17y7Ws40Xyx4FOCt8jD03G+jEafpuVJnPiDmaZQXJEpEfekGOvhKGOCtBnT5uatjKEuVWuDA=',
+'admin');
+
 INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
 VALUES (1, '39.193684289509065', '-84.32208179208072', 'moderate', 
         'Not too bad. Located on the left side of the road.');
