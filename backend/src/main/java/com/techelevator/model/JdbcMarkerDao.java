@@ -24,7 +24,7 @@ public class JdbcMarkerDao implements MarkerDao {
 	public List<Marker> getAllMarkers() {
 		List<Marker> markers = new ArrayList<>();
 		
-		String sql = "SELECT id, user_id, latitude, longitude, rating, comments "
+		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments "
 				+ "FROM markers";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -40,7 +40,7 @@ public class JdbcMarkerDao implements MarkerDao {
 	public Marker getMarkerById(long id) {
 		Marker m = null;
 		
-		String sql = "SELECT id, user_id, latitude, longitude, rating, comments "
+		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments "
 				+ "FROM markers "
 				+ "WHERE id = ?";
 		
@@ -51,6 +51,22 @@ public class JdbcMarkerDao implements MarkerDao {
 		}
 		
 		return m;
+	}
+	
+	@Override
+	public List<Marker> getMarkersByUserId(long userId) {
+		List<Marker> markers = new ArrayList<>();
+		
+		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments "
+				+ "FROM markers "
+				+ "WHERE user_id = ?";
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+		while(results.next()) {
+			markers.add(mapRowToMarker(results));
+		}
+		
+		return markers;
 	}
 	
 	@Override
@@ -95,6 +111,7 @@ public class JdbcMarkerDao implements MarkerDao {
 		Marker m = new Marker();
 		m.setId(row.getLong("id"));
 		m.setUserId(row.getLong("user_id"));
+		m.setReportDate(row.getDate("report_date").toLocalDate());
 		m.setLatitude(Double.parseDouble(row.getString("latitude")));
 		m.setLongitude(Double.parseDouble(row.getString("longitude")));
 		m.setRating(row.getString("rating"));

@@ -1,9 +1,12 @@
 package com.techelevator.model;
 
+import java.time.LocalDate;
+
 public class Marker {
 	
 	private long id;
 	private long userId;
+	private LocalDate reportDate;
 	private double latitude;
 	private double longitude; 
 	private String rating;
@@ -20,6 +23,12 @@ public class Marker {
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+	public LocalDate getReportDate() {
+		return reportDate;
+	}
+	public void setReportDate(LocalDate reportDate) {
+		this.reportDate = reportDate;
 	}
 	public double getLatitude() {
 		return latitude;

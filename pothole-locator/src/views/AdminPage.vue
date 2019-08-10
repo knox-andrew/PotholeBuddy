@@ -1,20 +1,11 @@
 <template>
   <div class="content" id="container">
-    <div id="map">
-        <pothole-map v-bind:class="[showForm ? 'halfMap' : 'fullScreen']" v-on:mapClicked="mapClicked($event)" :markers="markers" :canReport="canReport"></pothole-map>
-    </div>
-
-    <div id="form">
-      <user-form v-if="showForm" v-on:wasCanceled="removeMarker" v-on:submitted="addMarker"></user-form>
-      <admin-form></admin-form>
-    </div>
+    <pothole-list :markers="markers"></pothole-list>
   </div>
 </template>
 
 <script>
-import PotholeMap from '@/components/PotholeMap.vue'
-import UserForm from '@/components/UserForm.vue'
-import AdminForm from '@/components/AdminForm.vue'
+import PotholeList from '@/components/PotholeList.vue'
 import auth from "@/auth.js"
 
 export default{
@@ -32,9 +23,7 @@ export default{
         }
     },
     components: {
-        PotholeMap,
-        UserForm,
-        AdminForm
+        PotholeList
     },
     methods: {
         mapClicked(marker) {

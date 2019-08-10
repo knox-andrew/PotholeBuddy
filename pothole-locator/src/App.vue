@@ -15,22 +15,14 @@
   </div>
 </template>
 <script>
-import auth from '@/auth.js'
 
 export default {
   data() {
     return {
       API_URL: 'http://localhost:8080/AuthenticationApplication/'
-     
     }
-  },
- computed: {
-   isAdmin() {
-      return auth.getUser().rol === 'admin';
-   }
-   
+  }   
  }
-}
 </script>
 <style>
 body {
