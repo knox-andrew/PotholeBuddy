@@ -1,28 +1,53 @@
 <template>
   <div id="app">
-    <nav class="nav">
-    <ul>
-      <router-link :to="{name: 'landing-page'}" tag="li" exact>Home</router-link>
-      <router-link :to="{name: 'login'}" tag="li">Login</router-link>
-      <router-link :to="{name: 'register'}" tag="li">Register</router-link>
-      <router-link :to="{name: 'anonymous-view'}" tag="li">View Map</router-link>
-      <router-link :to="{name: 'report'}" tag="li">Report View</router-link>
-      <router-link :to="{name: 'administrator'}" tag="li">Admin View</router-link>
-      
-    </ul>
-    </nav>
-    <router-view :apiURL="API_URL"/>
+    <b-navbar toggleable="lg" type="dark" variant="dark">
+      <b-navbar-brand :to="{name: 'landing-page'}">Home</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item :to="{name: 'anonymous-view'}">View Potholes</b-nav-item>
+          <b-nav-item v-if="isLoggedIn()" :to="{name: 'report'}">Report a Pothole</b-nav-item>
+          <b-nav-item v-if="isAdmin()" :to="{name: 'administrator'}">Admin View</b-nav-item>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
+          <b-nav-text class="pr-3">Hello User!</b-nav-text>
+          <b-button @click.prevent="logout()">Logout</b-button>
+        </b-navbar-nav>
+        <b-navbar-nav v-else class="ml-auto">
+          <b-nav-item :to="{name: 'register'}">Register</b-nav-item>
+          <b-nav-item :to="{name: 'login'}">Login</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <router-view :apiURL="API_URL" />
   </div>
 </template>
 <script>
-
+import auth from "@/auth.js";
 export default {
   data() {
     return {
-      API_URL: 'http://localhost:8080/AuthenticationApplication/'
+      API_URL: "http://localhost:8080/AuthenticationApplication/"
+    };
+  },
+  methods: {
+    isLoggedIn() {
+      return auth.getUser() != null;
+    },
+    isAdmin() {
+      return auth.getUser() != null && auth.getUser().rol === "admin";
+    },
+    logout() {
+      auth.logout();
+      this.$router.push("/");
+      this.$forceUpdate();
     }
-  }   
- }
+  }
+};
 </script>
 <style>
 body {
@@ -32,42 +57,9 @@ body {
   color: black;
 }
 .content {
-  background-color: rgba(200,200,200,0.7);
+  background-color: rgba(200, 200, 200, 0.7);
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-}
-header {
-  background-color: #E34232;
-}
-.nav {
-  margin:0;
-  padding:0;
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-}
-.nav li {
-  display: inline-block;
-  padding:20px;
-  color: #fff;
-  background-color: #E34232;
-}
-.nav li a {
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 14px;
-  text-decoration: none;
-}
-.nav li:hover {
-  background-color: rgb(216, 216, 216);
-  cursor: pointer;
-  color:rgb(44, 44, 44);
-}
-.nav li a:hover {
-  color:rgb(44, 44, 44);
-}
-.nav .router-link-active {
-  background-color: rgb(44, 44, 44);
 }
 </style>
