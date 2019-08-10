@@ -12,7 +12,21 @@
           <b-nav-item v-if="isAdmin()" :to="{name: 'administrator'}">Admin View</b-nav-item>
         </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
+        <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
+          <b-nav-item-dropdown :text="getUserMessage()" right>
+            <b-dropdown-item href="#">View reported potholes</b-dropdown-item>
+            <b-dropdown-item-button @click.prevent="logout()">Logout</b-dropdown-item-button>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+        <b-navbar-nav v-else class="ml-auto">
+          <b-nav-item-dropdown :text="getUserMessage()" right>
+            <b-dropdown-item href="/login">Login</b-dropdown-item>
+            <b-dropdown-item href="/register">Need an account?</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+
+        <!-- Simple working old -->
+        <!--
         <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
           <b-nav-text class="pr-3">Hello User!</b-nav-text>
           <b-button @click.prevent="logout()">Logout</b-button>
@@ -22,11 +36,6 @@
             <b-dropdown-item tag="button" href="/login">Login</b-dropdown-item>
             <b-dropdown-item href="/register">Need an account?</b-dropdown-item>
           </b-nav-item-dropdown>
-        </b-navbar-nav>
-        <!--
-        <b-navbar-nav v-else class="ml-auto">
-          <b-nav-item :to="{name: 'register'}">Register</b-nav-item>
-          <b-nav-item :to="{name: 'login'}">Login</b-nav-item>
         </b-navbar-nav>
         -->
       </b-collapse>
@@ -53,6 +62,16 @@ export default {
       auth.logout();
       this.$router.push("/");
       this.$forceUpdate();
+    },
+    getRole() {
+      return this.isLoggedIn() ? auth.getUser().rol : "";
+    },
+    getUserMessage() {
+      if (auth.getUser() === null) {
+        return "Account";
+      } else {
+        return "Hello " + auth.getUser().rol + "!";
+      }
     }
   }
 };
