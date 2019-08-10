@@ -18,9 +18,17 @@
           <b-button @click.prevent="logout()">Logout</b-button>
         </b-navbar-nav>
         <b-navbar-nav v-else class="ml-auto">
+          <b-nav-item-dropdown text="User" right>
+            <b-dropdown-item tag="button" href="/login">Login</b-dropdown-item>
+            <b-dropdown-item href="/register">Need an account?</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+        <!--
+        <b-navbar-nav v-else class="ml-auto">
           <b-nav-item :to="{name: 'register'}">Register</b-nav-item>
           <b-nav-item :to="{name: 'login'}">Login</b-nav-item>
         </b-navbar-nav>
+        -->
       </b-collapse>
     </b-navbar>
     <router-view :apiURL="API_URL" />
