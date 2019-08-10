@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand :to="{name: 'landing-page'}">Home</b-navbar-brand>
+      <b-navbar-brand :to="{name: 'landing-page'}">
+        <b-img src="./assets/pothole_color.png" height="30px" class="pr-2" />PotholeBuddy
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -14,14 +16,14 @@
 
         <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
           <b-nav-item-dropdown :text="getUserMessage()" right>
-            <b-dropdown-item href="#">View reported potholes</b-dropdown-item>
+            <b-dropdown-item href="#">View your reports</b-dropdown-item>
             <b-dropdown-item-button @click.prevent="logout()">Logout</b-dropdown-item-button>
           </b-nav-item-dropdown>
         </b-navbar-nav>
         <b-navbar-nav v-else class="ml-auto">
           <b-nav-item-dropdown :text="getUserMessage()" right>
-            <b-dropdown-item href="/login">Login</b-dropdown-item>
-            <b-dropdown-item href="/register">Need an account?</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'login'}">Login</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'register'}">Need an account?</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
