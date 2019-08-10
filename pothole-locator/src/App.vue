@@ -42,7 +42,7 @@
         -->
       </b-collapse>
     </b-navbar>
-    <router-view :apiURL="API_URL" />
+    <router-view :apiURL="apiURL" :markers="markers" />
   </div>
 </template>
 <script>
@@ -50,7 +50,8 @@ import auth from "@/auth.js";
 export default {
   data() {
     return {
-      API_URL: "http://localhost:8080/AuthenticationApplication/"
+      apiURL: "http://localhost:8080/AuthenticationApplication/",
+      markers: []
     };
   },
   methods: {
@@ -75,6 +76,12 @@ export default {
         return "Hello " + auth.getUser().rol + "!";
       }
     }
+  },
+  created() {
+    fetch(this.apiURL + "markers")
+      .then(response => response.json())
+      .then(parsedData => (this.markers = parsedData))
+      .catch(err => console.log(err));
   }
 };
 </script>
