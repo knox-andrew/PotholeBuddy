@@ -73,7 +73,7 @@ export default {
       if (auth.getUser() === null) {
         return "Account";
       } else {
-        return "Hello " + auth.getUser().rol + "!";
+        return "Hello, " + auth.getUser().sub;
       }
     }
   },
