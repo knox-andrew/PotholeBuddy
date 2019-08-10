@@ -20,7 +20,7 @@ const router = new Router({
 			component: LandingPage,
 			meta: {
 				title: "PotholeBuddy",
-				requiresAuth: false
+				requiredAuth: "none user admin"
 			}
 		},
 		{
@@ -29,7 +29,7 @@ const router = new Router({
 			component: LoginPage,
 			meta: {
 				title: "PotholeBuddy Login",
-				requiresAuth: false
+				requiredAuth: "none user admin"
 			}
 		},
 		{
@@ -38,7 +38,7 @@ const router = new Router({
 			component: RegisterPage,
 			meta: {
 				title: "PotholeBuddy Register",
-				requiresAuth: false
+				requiredAuth: "none user admin"
 			}
 		},
 		{
@@ -47,7 +47,7 @@ const router = new Router({
 			component: MapView,
 			meta: {
 				title: "View Potholes",
-				requiresAuth: false
+				requiredAuth: "none user admin"
 			}
 		},
 		{
@@ -56,7 +56,7 @@ const router = new Router({
 			component: ReportPage,
 			meta: {
 				title: "Report a Pothole",
-				requiresAuth: true
+				requiredAuth: "user admin"
 			}
 		},
 		{
@@ -65,21 +65,23 @@ const router = new Router({
 			component: AdminPage,
 			meta: {
 				title: "Administration",
-				requiresAuth: true
+				requiredAuth: "admin"
 			}
 		}
 	]
 });
 router.beforeEach((to, from, next) => {
 	// Determine if the route requires Authentication
-	const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+	const requiredAuth = to.meta.requiredAuth;
 	const user = auth.getUser();
+	const userAuth = user != null ? user.rol : "none";
 	document.title = to.meta.title;
 	// If it does and they are not logged in, send the user to "/login"
-	if (requiresAuth && !user) {
-		next("/login");
-	} else {
+
+	if (requiredAuth.includes(userAuth)) {
 		next();
+	} else {
+		next("/login");
 	}
 });
 export default router;
