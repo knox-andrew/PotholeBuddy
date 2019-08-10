@@ -19,7 +19,7 @@ const router = new Router({
 			name: "landing-page",
 			component: LandingPage,
 			meta: {
-				title: "Home",
+				title: "PotholeBuddy",
 				requiresAuth: false
 			}
 		},
@@ -28,7 +28,7 @@ const router = new Router({
 			name: "login",
 			component: LoginPage,
 			meta: {
-				title: "Login",
+				title: "PotholeBuddy Login",
 				requiresAuth: false
 			}
 		},
@@ -37,7 +37,7 @@ const router = new Router({
 			name: "register",
 			component: RegisterPage,
 			meta: {
-				title: "Register",
+				title: "PotholeBuddy Register",
 				requiresAuth: false
 			}
 		},
@@ -46,7 +46,7 @@ const router = new Router({
 			name: "anonymous-view",
 			component: MapView,
 			meta: {
-				title: "View potholes",
+				title: "View Potholes",
 				requiresAuth: false
 			}
 		},
@@ -55,7 +55,7 @@ const router = new Router({
 			name: "report",
 			component: ReportPage,
 			meta: {
-				title: "Report a pothole",
+				title: "Report a Pothole",
 				requiresAuth: true
 			}
 		},
@@ -64,7 +64,7 @@ const router = new Router({
 			name: "administrator",
 			component: AdminPage,
 			meta: {
-				title: "Admin page",
+				title: "Administration",
 				requiresAuth: true
 			}
 		}
