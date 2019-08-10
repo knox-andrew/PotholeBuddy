@@ -1,6 +1,6 @@
 <template>
   <div class="content" id="container">
-    <pothole-list></pothole-list>
+    <pothole-list :markers="markers"></pothole-list>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ import auth from "@/auth.js";
 
 export default {
   props: {
-    apiURL: String
+    apiURL: String,
+    markers: Array
   },
   data() {
     return {

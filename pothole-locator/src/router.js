@@ -62,9 +62,9 @@ const router = new Router({
 		{
 			path: "/admin",
 			name: "administrator",
-			title: "Admin page",
 			component: AdminPage,
 			meta: {
+				title: "Admin page",
 				requiresAuth: true
 			}
 		}
