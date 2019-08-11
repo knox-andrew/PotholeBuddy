@@ -6,7 +6,6 @@
 
 <script>
 import PotholeList from "@/components/PotholeList.vue";
-import auth from "@/auth.js";
 
 export default {
   props: {
@@ -18,8 +17,7 @@ export default {
       showForm: false,
       mPosition: Object,
       rating: "",
-      comments: "",
-      canReport: true
+      comments: ""
     };
   },
   components: {
@@ -50,14 +48,6 @@ export default {
       });
 
       this.showForm = false;
-    }
-  },
-
-  created() {
-    if (auth.getUser().rol != "admin") {
-      this.$router.push("/login");
-    } else {
-      this.canReport = true;
     }
   }
 };
