@@ -5,13 +5,17 @@
     <div id="list">
         <table>
       <tr>
-        <th>User ID</th>
+        <th>Marker ID</th>
+        <th>Reported By</th>
+        <th>Reported On</th>
         <th>Severity</th>
         <th>Comments</th>
         <th>delete</th>
       </tr>
       <tr v-for="marker in markers" :key="marker.id">
-        <td>{{marker.userId}}</td>
+        <td>{{marker.id}}</td>
+        <td>{{marker.userName}}</td>
+        <td>{{marker.reportDate.toString()}}</td>
         <td>{{marker.rating}}</td>
         <td>{{marker.comments}}</td>
         <td><button type="delete" v-on:click="deleteMarker(marker.id)">delete</button></td>
