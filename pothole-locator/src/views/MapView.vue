@@ -6,6 +6,7 @@
         Each marker on the map represents a reported pothole.
         You can click on a marker to view details about the pothole.
       </h3>
+      <p>Tracked potholes: {{markers.length}}</p>
     </div>
     <div id="map">
       <pothole-map :canReport="canReport" :markers="markers" style="width: 1225px; height: 600px"></pothole-map>
