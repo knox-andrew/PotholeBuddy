@@ -24,7 +24,7 @@ public class JdbcMarkerDao implements MarkerDao {
 	public List<Marker> getAllMarkers() {
 		List<Marker> markers = new ArrayList<>();
 		
-		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments "
+		String sql = "SELECT id, user_id, username, report_date, latitude, longitude, rating, comments "
 				+ "FROM markers";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -40,7 +40,7 @@ public class JdbcMarkerDao implements MarkerDao {
 	public Marker getMarkerById(long id) {
 		Marker m = null;
 		
-		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments "
+		String sql = "SELECT id, user_id, username, report_date, latitude, longitude, rating, comments "
 				+ "FROM markers "
 				+ "WHERE id = ?";
 		
@@ -57,7 +57,7 @@ public class JdbcMarkerDao implements MarkerDao {
 	public List<Marker> getMarkersByUserId(long userId) {
 		List<Marker> markers = new ArrayList<>();
 		
-		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments "
+		String sql = "SELECT id, user_id, username, report_date, latitude, longitude, rating, comments "
 				+ "FROM markers "
 				+ "WHERE user_id = ?";
 		
@@ -70,17 +70,18 @@ public class JdbcMarkerDao implements MarkerDao {
 	}
 	
 	@Override
-	public Marker create(long userId, double latitude, double longitude, String rating, String comments) {
+	public Marker create(long userId, String username, double latitude, double longitude, String rating, String comments) {
 		
-		String sql = "INSERT INTO markers (user_id, latitude, longitude, rating, comments) "
-				+ "VALUES(?, ?, ?, ?, ?) RETURNING id";
+		String sql = "INSERT INTO markers (user_id, username, latitude, longitude, rating, comments) "
+				+ "VALUES(?, ?, ?, ?, ?, ?) RETURNING id";
 		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, latitude, longitude, rating, comments);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, username, latitude, longitude, rating, comments);
 		Marker m = null;
 		if(results.next()) {
 			m = new Marker();
 			m.setId(results.getLong("id"));
 			m.setUserId(userId);
+			m.setUserName(username);
 			m.setLatitude(latitude);
 			m.setLongitude(longitude);
 			m.setRating(rating);
@@ -91,12 +92,12 @@ public class JdbcMarkerDao implements MarkerDao {
 	}
 	
 	@Override
-	public Marker update(long id, long userId, double latitude, double longitude, String rating, String comments) {
+	public Marker update(long id, long userId, String username, double latitude, double longitude, String rating, String comments) {
 		String sql = "UPDATE markers "
-				+ "SET user_id = ?, latitude = ?, longitude = ?, rating = ?, comments = ? "
+				+ "SET user_id = ?, username = ?, latitude = ?, longitude = ?, rating = ?, comments = ? "
 				+ "WHERE id = ?";
 		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, Double.toString(latitude), Double.toString(longitude), rating, comments, id);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, username, Double.toString(latitude), Double.toString(longitude), rating, comments, id);
 		
 		Marker m = null;
 		if(results.next()) {
@@ -111,6 +112,7 @@ public class JdbcMarkerDao implements MarkerDao {
 		Marker m = new Marker();
 		m.setId(row.getLong("id"));
 		m.setUserId(row.getLong("user_id"));
+		m.setUserName(row.getString("username"));
 		m.setReportDate(row.getDate("report_date").toLocalDate());
 		m.setLatitude(Double.parseDouble(row.getString("latitude")));
 		m.setLongitude(Double.parseDouble(row.getString("longitude")));
@@ -119,4 +121,23 @@ public class JdbcMarkerDao implements MarkerDao {
 		
 		return m;
 	}
+
+	@Override
+	public void delete(long id) {
+		String sql = "DELETE FROM markers WHERE id = ?";
+		jdbcTemplate.update(sql, id);
+
+	}
+
+	@Override
+	public Marker read(long id) {
+		String sql = "SELECT id, user_id, username, report_date, latitude, longitude, rating, comments FROM markers WHERE id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        if(results.next()) {
+        	return this.mapRowToMarker(results);
+        }
+        return null;
+	}
+	
 }

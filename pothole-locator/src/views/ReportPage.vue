@@ -64,7 +64,8 @@ export default {
         longitude: this.tempMarker.longitude,
         comments: formData.comments,
         rating: formData.rating,
-        userId: auth.getUser().uid
+        userId: auth.getUser().uid,
+        userName: auth.getUser().sub
       };
 
       fetch(this.apiURL + "markers", {

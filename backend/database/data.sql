@@ -13,14 +13,14 @@ INSERT INTO users ("username", "password", "salt", "role") VALUES
 'e5iKdR3wo1gKD7TJIeANVxKZRYZmO0XPqo2vDwRFiTI7SD2ol1iHyH4FeBPaeoJLyichw7muJXR7Z//L33/KpWmkjXjkS8/R39p5cfZpFLsANrIobO6ZMFeMD1ZXraVAOYS5ncU3/AXgvSTwTWZMfwgvvI3KEEiKfMeEfXPOJ1I=',
 'admin');
 
-INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (1, '39.193684289509065', '-84.32208179208072', 'moderate', 
+INSERT INTO markers ("user_id", "username", "latitude", "longitude", "rating", "comments") 
+VALUES (1, 'user', '39.193684289509065', '-84.32208179208072', 'moderate', 
         'Not too bad. Located on the left side of the road.');
 
-INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (1, '39.22214908061195', '-84.36568378182682', 'critical', 
+INSERT INTO markers ("user_id", "username", "latitude", "longitude", "rating", "comments") 
+VALUES (1, 'user', '39.22214908061195', '-84.36568378182682', 'critical', 
         'Very deep and covers almost half the road. Cracked 2 of my rims');
 
-INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (1, '39.1869910813758509', ' -84.3931552624023311', 'severe', 
+INSERT INTO markers ("user_id", "username", "latitude", "longitude", "rating", "comments") 
+VALUES (1, 'admin', '39.1869910813758509', ' -84.3931552624023311', 'severe', 
         'Fairly deep and in the middle of the road. Definitely avoid.');
