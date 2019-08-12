@@ -18,7 +18,7 @@ VALUES (1, '39.193684289509065', '-84.32208179208072', 'moderate',
         'Not too bad. Located on the left side of the road.');
 
 INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
-VALUES (1, '39.22214908061195', '-84.36568378182682', 'severe', 
+VALUES (1, '39.22214908061263', '-84.36568378182710', 'severe', 
         'Fairly deep and in the middle of the road. Definitely avoid.');
 
 INSERT INTO markers ("user_id", "latitude", "longitude", "rating", "comments") 
