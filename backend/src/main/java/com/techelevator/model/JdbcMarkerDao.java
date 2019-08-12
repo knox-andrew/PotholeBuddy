@@ -119,4 +119,23 @@ public class JdbcMarkerDao implements MarkerDao {
 		
 		return m;
 	}
+
+	@Override
+	public void delete(long id) {
+		String sql = "DELETE FROM markers WHERE id = ?";
+		jdbcTemplate.update(sql, id);
+
+	}
+
+	@Override
+	public Marker read(long id) {
+		String sql = "SELECT id, user_id, report_date, latitude, longitude, rating, comments FROM markers WHERE id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        if(results.next()) {
+        	return this.mapRowToMarker(results);
+        }
+        return null;
+	}
+	
 }
