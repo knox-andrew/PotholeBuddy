@@ -9,14 +9,15 @@
     <div id="map">
       <pothole-map
         v-bind:class="[showForm ? 'halfMap' : 'fullScreen']"
-        v-on:mapClicked="mapClicked($event)"
+        @mapClicked="mapClicked($event)"
         :markers="markers"
         :canReport="canReport"
+        :showTempMarker="showTempMarker"
       ></pothole-map>
     </div>
 
     <div id="form">
-      <user-form v-if="showForm" v-on:wasCanceled="removeMarker" v-on:submitted="addMarker"></user-form>
+      <user-form v-if="showForm" v-on:wasCanceled="removeMarker" @submitted="submitted"></user-form>
     </div>
   </div>
 </template>
@@ -33,8 +34,9 @@ export default {
   },
   data() {
     return {
+      showTempMarker: false,
       showForm: false,
-      newMarker: Object,
+      tempMarker: Object,
       currentUser: Object,
       rating: "",
       comments: "",
@@ -46,35 +48,36 @@ export default {
     UserForm
   },
   methods: {
-    mapClicked(marker) {
-      if (this.showForm) {
-        this.markers.pop();
-      }
-      this.newMarker = {
-        comments: "",
-        latitude: parseFloat(marker.latitude),
-        longitude: parseFloat(marker.longitude),
-        rating: "",
-        userId: auth.getUser().uid
+    mapClicked(tempMarker) {
+      this.tempMarker = {
+        latitude: tempMarker.latitude,
+        longitude: tempMarker.longitude
       };
-      this.markers.push(this.newMarker);
+      this.showTempMarker = true;
       this.showForm = true;
     },
     removeMarker() {
-      this.markers.pop();
+      this.showTempMarker = false;
       this.showForm = false;
     },
-    addMarker(formData) {
-      this.newMarker.comments = formData.comments;
-      this.newMarker.rating = formData.rating;
+    submitted(formData) {
+      const newMarker = {
+        latitude: this.tempMarker.latitude,
+        longitude: this.tempMarker.longitude,
+        comments: formData.comments,
+        rating: formData.rating,
+        userId: auth.getUser().uid
+      };
 
       fetch(this.apiURL + "markers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(this.newMarker)
+        body: JSON.stringify(newMarker)
       });
 
+      this.markers.push(newMarker);
       this.showForm = false;
+      this.showTempMarker = false;
     }
   }
 };

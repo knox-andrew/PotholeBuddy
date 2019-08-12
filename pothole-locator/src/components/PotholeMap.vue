@@ -18,6 +18,7 @@
       :clickable="true"
       @click="toggleInfoWindow(m,i)"
     ></gmap-marker>
+    <gmap-marker v-if="showTempMarker" :position="{lat: tempLat, lng: tempLng}" :clickable="false"></gmap-marker>
   </gmap-map>
 </template>
 
@@ -25,10 +26,14 @@
 export default {
   props: {
     markers: Array,
-    canReport: Boolean
+    canReport: Boolean,
+
+    showTempMarker: Boolean
   },
   data() {
     return {
+      tempLat: 0,
+      tempLng: 0,
       center: { lat: 39.151898, lng: -84.4676563 },
       severity: "",
       comments: "",
@@ -59,12 +64,12 @@ export default {
         if (this.$refs.potholeMap.$mapObject.getZoom() != 13) {
           this.$refs.potholeMap.$mapObject.setZoom(13);
         }
-
-        const marker = {
-          latitude: event.latLng.lat(),
-          longitude: event.latLng.lng()
-        };
-        this.$emit("mapClicked", marker);
+        this.tempLat = event.latLng.lat();
+        this.tempLng = event.latLng.lng();
+        this.$emit("mapClicked", {
+          latitude: this.tempLat,
+          longitude: this.tempLng
+        });
       }
     },
     toggleInfoWindow: function(marker, idx) {
