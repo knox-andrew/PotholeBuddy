@@ -18,7 +18,13 @@
       :clickable="true"
       @click="toggleInfoWindow(m,i)"
     ></gmap-marker>
-    <gmap-marker v-if="showTempMarker" :position="{lat: tempLat, lng: tempLng}" :clickable="false"></gmap-marker>
+    <gmap-marker 
+      id="tempMarker" 
+      v-if="showTempMarker" 
+      :position="{lat: tempLat, lng: tempLng}" 
+      :clickable="false"
+      :icon="{url:'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'}"
+    ></gmap-marker>
   </gmap-map>
 </template>
 
@@ -93,3 +99,8 @@ export default {
   }
 };
 </script>
+
+<style>
+
+</style>
+
