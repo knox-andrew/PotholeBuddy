@@ -7,14 +7,15 @@
     <div id="report-map">
       <pothole-map
         v-bind:class="[showForm ? 'halfMap' : 'fullScreen']"
-        v-on:mapClicked="mapClicked($event)"
+        @mapClicked="mapClicked($event)"
         :markers="markers"
         :canReport="canReport"
+        :showTempMarker="showTempMarker"
       ></pothole-map>
     </div>
 
     <div id="form">
-      <user-form v-if="showForm" v-on:wasCanceled="removeMarker" v-on:submitted="addMarker"></user-form>
+      <user-form v-if="showForm" v-on:wasCanceled="removeMarker" @submitted="submitted"></user-form>
     </div>
   </div>
 </template>
@@ -31,8 +32,9 @@ export default {
   },
   data() {
     return {
+      showTempMarker: false,
       showForm: false,
-      mPosition: Object,
+      tempMarker: Object,
       currentUser: Object,
       rating: "",
       comments: "",
@@ -44,31 +46,36 @@ export default {
     UserForm
   },
   methods: {
-    mapClicked(marker) {
-      this.mPosition = marker;
+    mapClicked(tempMarker) {
+      this.tempMarker = {
+        latitude: tempMarker.latitude,
+        longitude: tempMarker.longitude
+      };
+      this.showTempMarker = true;
       this.showForm = true;
     },
     removeMarker() {
+      this.showTempMarker = false;
       this.showForm = false;
     },
-    addMarker(formData) {
-      const marker = {
+    submitted(formData) {
+      const newMarker = {
+        latitude: this.tempMarker.latitude,
+        longitude: this.tempMarker.longitude,
         comments: formData.comments,
-        latitude: parseFloat(this.mPosition.latitude),
-        longitude: parseFloat(this.mPosition.longitude),
         rating: formData.rating,
         userId: auth.getUser().uid
       };
 
-      this.markers.push(marker);
-
       fetch(this.apiURL + "markers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(marker)
+        body: JSON.stringify(newMarker)
       });
 
+      this.markers.push(newMarker);
       this.showForm = false;
+      this.showTempMarker = false;
     }
   }
 };
