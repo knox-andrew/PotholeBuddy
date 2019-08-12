@@ -40,20 +40,6 @@
             <b-dropdown-item @click="active = 'register'" :to="{name: 'register'}">Need an account?</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
-
-        <!-- Simple working old -->
-        <!--
-        <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
-          <b-nav-text class="pr-3">Hello User!</b-nav-text>
-          <b-button @click.prevent="logout()">Logout</b-button>
-        </b-navbar-nav>
-        <b-navbar-nav v-else class="ml-auto">
-          <b-nav-item-dropdown text="User" right>
-            <b-dropdown-item tag="button" href="/login">Login</b-dropdown-item>
-            <b-dropdown-item href="/register">Need an account?</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-        -->
       </b-collapse>
     </b-navbar>
     <router-view :apiURL="apiURL" :markers="markers" />

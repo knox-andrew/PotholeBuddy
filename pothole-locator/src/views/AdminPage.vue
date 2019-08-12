@@ -3,7 +3,6 @@
   <div class="content" id="container">
 
     <div id="list">
-        <!-- <pothole-list :markers="markers"></pothole-list> -->
         <table>
       <tr>
         <th>User ID</th>
@@ -30,7 +29,7 @@
 
 <script>
 
-// import PotholeList from '@/components/PotholeList.vue'
+
 import PotholeMap from '@/components/PotholeMap.vue'
 
 import auth from "@/auth.js";
@@ -52,7 +51,6 @@ export default {
     };
   },
   components: {
-    // PotholeList,
     PotholeMap,
 
  },
