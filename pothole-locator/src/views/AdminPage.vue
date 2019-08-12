@@ -1,66 +1,94 @@
 <template>
+
   <div class="content" id="container">
 
     <div id="list">
-        <pothole-list :markers="markers"></pothole-list>
+        <!-- <pothole-list :markers="markers"></pothole-list> -->
+        <table>
+      <tr>
+        <th>User ID</th>
+        <th>Severity</th>
+        <th>Comments</th>
+        <th>delete</th>
+      </tr>
+      <tr v-for="marker in markers" :key="marker.id">
+        <td>{{marker.userId}}</td>
+        <td>{{marker.rating}}</td>
+        <td>{{marker.comments}}</td>
+        <td><button type="delete" v-on:click="deleteMarker(marker.id)">delete</button></td>
+      </tr>
+    </table>
     </div>
     <div id="map">
         <pothole-map style="height: 600px; width: 525px;" :markers="markers" />
     </div>
 
   </div>
+
+
 </template>
 
 <script>
-import PotholeList from '@/components/PotholeList.vue'
+
+// import PotholeList from '@/components/PotholeList.vue'
 import PotholeMap from '@/components/PotholeMap.vue'
+
+import auth from "@/auth.js";
+
 
 export default {
   props: {
     apiURL: String,
-    markers: Array
+   
   },
   data() {
     return {
+
       showForm: false,
       mPosition: Object,
       rating: "",
-      comments: ""
+      comments: "",
+       markers: []
     };
   },
   components: {
-    PotholeList,
-    PotholeMap
-  },
+    // PotholeList,
+    PotholeMap,
+
+ },
+ 
   methods: {
-    mapClicked(marker) {
-      this.mPosition = marker;
-      this.showForm = true;
+    deleteMarker(id) {
+        let result = confirm("Admin wait are you sure you want to delete this specific marker?");
+        if (result) {
+            fetch(this.apiURL + "markers/" + `${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + auth.getToken()
+                },
+               
+            }) 
+        .then(response => {
+          if (response.ok) {
+            const index = this.markers.map(marker => marker.id).indexOf(id);
+            this.markers.splice(index, 1);
+          }
+        })
+        .catch(err => console.error(err));
+      }
+     },
     },
-    removeMarker() {
-      this.showForm = false;
-    },
-    addMarker(formData) {
-      const marker = {
-        comments: formData.comments,
-        latitude: parseFloat(this.mPosition.latitude),
-        longitude: parseFloat(this.mPosition.longitude),
-        rating: formData.rating
-      };
-
-      this.markers.push(marker);
-
-      fetch(this.apiURL + "markers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(marker)
-      });
-
-      this.showForm = false;
-    }
+  created() {
+    fetch(this.apiURL + "markers")
+      .then(response => response.json())
+      .then(parsedData => (this.markers = parsedData))
+      .catch(err => console.log(err));
   }
-};
+}
 </script>
+
 
 <style>
 * {
@@ -83,5 +111,13 @@ export default {
 .halfMap {
   height: 600px;
   width: 600px;
+}
+tr th {
+  padding: 10px;
+  border: 1px solid black;
+}
+tr td {
+  padding: 10px;
+  border: 1px solid black;
 }
 </style>
