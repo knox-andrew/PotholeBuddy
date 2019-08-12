@@ -14,6 +14,7 @@ CREATE TABLE users (
 CREATE TABLE markers (
     id serial PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
+    username varchar(255) REFERENCES users(username),
     report_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     latitude varchar(64) NOT NULL,
     longitude varchar(64) NOT NULL,

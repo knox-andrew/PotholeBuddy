@@ -33,7 +33,6 @@ export default {
   props: {
     markers: Array,
     canReport: Boolean,
-
     showTempMarker: Boolean
   },
   data() {

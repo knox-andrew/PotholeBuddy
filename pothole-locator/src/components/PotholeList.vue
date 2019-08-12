@@ -3,13 +3,15 @@
     <table id="list-comp">
       <tr>
         <th>Marker ID</th>
-        <th>User ID</th>
+        <th>Reported By</th>
+        <th>Reported On</th>
         <th>Severity</th>
         <th>Comments</th>
       </tr>
       <tr v-for="marker in markers" :key="marker.id">
         <td>{{marker.id}}</td>
-        <td>{{marker.userId}}</td>
+        <td>{{marker.userName}}</td>
+        <td>{{marker.reportDate.toString()}}</td>
         <td>{{marker.rating}}</td>
         <td>{{marker.comments}}</td>
       </tr>

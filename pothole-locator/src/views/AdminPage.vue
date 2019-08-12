@@ -78,7 +78,7 @@ export default {
 }
 #list {
   padding: 30px;
-  width: 45%;
+  width: 55%;
 }
 .halfMap {
   height: 600px;

@@ -33,9 +33,10 @@ public class MarkerController {
 	public Marker create(@RequestBody Marker marker) {
 		return markerDao.create(
 				marker.getUserId(), 
+				marker.getUserName(),
 				marker.getLatitude(), 
 				marker.getLongitude(), 
 				marker.getRating(), 
-				marker.getComments());
+				marker.getComments() );
 	}
 }
