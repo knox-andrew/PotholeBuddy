@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand :to="{name: 'landing-page'}">
+      <b-navbar-brand @click="active = 'landing-page'" :to="{name: 'landing-page'}">
         <b-img src="./assets/pothole_color.png" height="30px" class="pr-2" />PotholeBuddy
       </b-navbar-brand>
 
@@ -9,21 +9,35 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item :to="{name: 'anonymous-view'}">View Potholes</b-nav-item>
-          <b-nav-item v-if="isLoggedIn()" :to="{name: 'report'}">Report a Pothole</b-nav-item>
-          <b-nav-item v-if="isAdmin()" :to="{name: 'administrator'}">Admin View</b-nav-item>
+          <b-nav-item
+            :active="active === 'anonymous-view'"
+            @click="active = 'anonymous-view'"
+            :to="{name: 'anonymous-view'}"
+          >View Potholes</b-nav-item>
+          <b-nav-item
+            :active="active === 'report'"
+            @click="active = 'report'"
+            v-if="isLoggedIn()"
+            :to="{name: 'report'}"
+          >Report a Pothole</b-nav-item>
+          <b-nav-item
+            :active="active === 'administrator'"
+            @click="active = 'administrator'"
+            v-if="isAdmin()"
+            :to="{name: 'administrator'}"
+          >Admin View</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
           <b-nav-item-dropdown :text="getUserMessage()" right>
-            <b-dropdown-item href="#">View your reports</b-dropdown-item>
-            <b-dropdown-item-button @click.prevent="logout()">Logout</b-dropdown-item-button>
+            <b-dropdown-item @click="active = '#'" href="#">View your reports</b-dropdown-item>
+            <b-dropdown-item-button @click.prevent="logout(), active='landing-page'">Logout</b-dropdown-item-button>
           </b-nav-item-dropdown>
         </b-navbar-nav>
         <b-navbar-nav v-else class="ml-auto">
           <b-nav-item-dropdown :text="getUserMessage()" right>
-            <b-dropdown-item :to="{name: 'login'}">Login</b-dropdown-item>
-            <b-dropdown-item :to="{name: 'register'}">Need an account?</b-dropdown-item>
+            <b-dropdown-item @click="active = 'login'" :to="{name: 'login'}">Login</b-dropdown-item>
+            <b-dropdown-item @click="active = 'register'" :to="{name: 'register'}">Need an account?</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
@@ -51,7 +65,8 @@ export default {
   data() {
     return {
       apiURL: "http://localhost:8080/AuthenticationApplication/",
-      markers: []
+      markers: [],
+      active: "home"
     };
   },
   methods: {
