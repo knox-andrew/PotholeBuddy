@@ -1,5 +1,5 @@
 <template>
-  <gmap-map :center="center" :zoom="11" @click="mapClicked">
+  <gmap-map ref="potholeMap" :center="center" :zoom="11" @click="mapClicked">
     <gmap-info-window
       :options="infoOptions"
       :position="infoWindowPos"
@@ -53,7 +53,13 @@ export default {
       return { lat: marker.latitude, lng: marker.longitude };
     },
     mapClicked(event) {
+      this.infoWinOpen = false;
       if (this.canReport) {
+        this.$refs.potholeMap.$mapObject.panTo(event.latLng);
+        if (this.$refs.potholeMap.$mapObject.getZoom() != 13) {
+          this.$refs.potholeMap.$mapObject.setZoom(13);
+        }
+
         const marker = {
           latitude: event.latLng.lat(),
           longitude: event.latLng.lng()
@@ -62,6 +68,7 @@ export default {
       }
     },
     toggleInfoWindow: function(marker, idx) {
+      this.$refs.potholeMap.$mapObject.panTo(this.getPosition(marker));
       this.infoWindowPos = this.getPosition(marker);
       this.severity = marker.rating;
       this.comments = marker.comments;

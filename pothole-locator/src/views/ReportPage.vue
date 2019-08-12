@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       showForm: false,
-      mPosition: Object,
+      newMarker: Object,
       currentUser: Object,
       rating: "",
       comments: "",
@@ -47,27 +47,31 @@ export default {
   },
   methods: {
     mapClicked(marker) {
-      this.mPosition = marker;
+      if (this.showForm) {
+        this.markers.pop();
+      }
+      this.newMarker = {
+        comments: "",
+        latitude: parseFloat(marker.latitude),
+        longitude: parseFloat(marker.longitude),
+        rating: "",
+        userId: auth.getUser().uid
+      };
+      this.markers.push(this.newMarker);
       this.showForm = true;
     },
     removeMarker() {
+      this.markers.pop();
       this.showForm = false;
     },
     addMarker(formData) {
-      const marker = {
-        comments: formData.comments,
-        latitude: parseFloat(this.mPosition.latitude),
-        longitude: parseFloat(this.mPosition.longitude),
-        rating: formData.rating,
-        userId: auth.getUser().uid
-      };
-
-      this.markers.push(marker);
+      this.newMarker.comments = formData.comments;
+      this.newMarker.rating = formData.rating;
 
       fetch(this.apiURL + "markers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(marker)
+        body: JSON.stringify(this.newMarker)
       });
 
       this.showForm = false;
