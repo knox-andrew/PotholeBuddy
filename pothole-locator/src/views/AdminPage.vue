@@ -1,11 +1,19 @@
 <template>
   <div class="content" id="container">
-    <pothole-list :markers="markers"></pothole-list>
+
+    <div id="list">
+        <pothole-list :markers="markers"></pothole-list>
+    </div>
+    <div id="map">
+        <pothole-map style="height: 600px; width: 525px;" :markers="markers" />
+    </div>
+
   </div>
 </template>
 
 <script>
-import PotholeList from "@/components/PotholeList.vue";
+import PotholeList from '@/components/PotholeList.vue'
+import PotholeMap from '@/components/PotholeMap.vue'
 
 export default {
   props: {
@@ -21,7 +29,8 @@ export default {
     };
   },
   components: {
-    PotholeList
+    PotholeList,
+    PotholeMap
   },
   methods: {
     mapClicked(marker) {
@@ -60,20 +69,16 @@ export default {
 #container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 #map {
   padding: 30px;
   height: 100%;
   width: 45%;
 }
-#form {
+#list {
   padding: 30px;
   width: 45%;
-}
-.fullScreen {
-  height: 600px;
-  width: 1225px;
 }
 .halfMap {
   height: 600px;

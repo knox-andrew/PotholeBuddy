@@ -1,14 +1,13 @@
 <template>
   <div class="content" id="container">
-    <div>
-      <h3>
-        Welcome to the viewing page.
-        Each marker on the map represents a reported pothole.
-        You can click on a marker to view details about the pothole.
-      </h3>
-    </div>
-    <div id="map">
-      <pothole-map :canReport="canReport" :markers="markers" style="width: 1225px; height: 600px"></pothole-map>
+    <header>
+        <h3 id="welcome">Welcome to the viewing page.</h3>
+        <h4>Each marker on the map represents a reported pothole.
+        You can click on a marker to view details about the pothole.</h4>
+      
+    </header>
+    <div id="view-map">
+      <pothole-map :canReport="canReport" :markers="markers" style="width: 1225px; height: 550px"></pothole-map>
     </div>
   </div>
 </template>
@@ -42,7 +41,10 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-#map {
+#view-map {
   padding: 30px;
+}
+#welcome {
+    color: rgb(132,26,26);
 }
 </style>
