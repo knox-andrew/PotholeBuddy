@@ -1,5 +1,5 @@
 <template>
-  <gmap-map :center="center" :zoom="11" @click="mapClicked">
+  <gmap-map ref="potholeMap" :center="center" :zoom="11" @click="mapClicked">
     <gmap-info-window
       :options="infoOptions"
       :position="infoWindowPos"
@@ -18,6 +18,13 @@
       :clickable="true"
       @click="toggleInfoWindow(m,i)"
     ></gmap-marker>
+    <gmap-marker 
+      id="tempMarker" 
+      v-if="showTempMarker" 
+      :position="{lat: tempLat, lng: tempLng}" 
+      :clickable="false"
+      :icon="{url:'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'}"
+    ></gmap-marker>
   </gmap-map>
 </template>
 
@@ -25,10 +32,14 @@
 export default {
   props: {
     markers: Array,
-    canReport: Boolean
+    canReport: Boolean,
+
+    showTempMarker: Boolean
   },
   data() {
     return {
+      tempLat: 0,
+      tempLng: 0,
       center: { lat: 39.151898, lng: -84.4676563 },
       severity: "",
       comments: "",
@@ -53,15 +64,22 @@ export default {
       return { lat: marker.latitude, lng: marker.longitude };
     },
     mapClicked(event) {
+      this.infoWinOpen = false;
       if (this.canReport) {
-        const marker = {
-          latitude: event.latLng.lat(),
-          longitude: event.latLng.lng()
-        };
-        this.$emit("mapClicked", marker);
+        this.$refs.potholeMap.$mapObject.panTo(event.latLng);
+        if (this.$refs.potholeMap.$mapObject.getZoom() != 13) {
+          this.$refs.potholeMap.$mapObject.setZoom(13);
+        }
+        this.tempLat = event.latLng.lat();
+        this.tempLng = event.latLng.lng();
+        this.$emit("mapClicked", {
+          latitude: this.tempLat,
+          longitude: this.tempLng
+        });
       }
     },
     toggleInfoWindow: function(marker, idx) {
+      this.$refs.potholeMap.$mapObject.panTo(this.getPosition(marker));
       this.infoWindowPos = this.getPosition(marker);
       this.severity = marker.rating;
       this.comments = marker.comments;
@@ -81,3 +99,8 @@ export default {
   }
 };
 </script>
+
+<style>
+
+</style>
+
