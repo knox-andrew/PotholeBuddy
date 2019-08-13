@@ -83,7 +83,6 @@ export default {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + auth.getToken()
                 },
-               
             }) 
             .then(response => {
               if (response.ok) {
@@ -104,7 +103,7 @@ export default {
        }
        marker.repairDate = dateArray;
        fetch(this.apiURL + 'markers/' + `${id}`, {
-           method: 'UPDATE',
+           method: 'PUT',
            headers: {
              Accept: "application/json",
              "Content-Type": "application/json",
@@ -112,7 +111,7 @@ export default {
            },
            body: JSON.stringify(marker)
          })
-         .then(parsedData => {
+        .then(parsedData => {
             this.marker = parsedData;
          })
         .then(this.showForm = false)
