@@ -1,12 +1,14 @@
 <template>
-  <div id="login" class="content">
-    <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-      <div
+<div>
+<div
         class="alert alert-danger"
         role="alert"
         v-if="invalidCredentials"
-      >Invalid username and password!</div>
+      >Invalid username or password!</div>
+  <div id="login" class="content">
+    <form class="form-signin" @submit.prevent="login">
+      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      
       <div
         class="alert alert-success"
         role="alert"
@@ -42,6 +44,7 @@
       <br />
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
     </form>
+  </div>
   </div>
 </template>
 
@@ -94,5 +97,24 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.content{
+   position: relative;
+    top: 50%;
+    left: 42%;
+    margin-top: 55px;
+    margin-left: -50px;
+    width: 320px;
+    height: 350px;
+}
+
+
+form {
+  width: 300px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
 </style>

@@ -1,10 +1,13 @@
 <template>
-  <div id="register" class="content">
-    <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-        There were problems registering this user.
+<div>
+ <div id="message-container" class="alert alert-danger" role="alert" v-if="registrationErrors">
+      {{errors}}
       </div>
+  <div id="register" class="content">
+    
+    <form class="form-register" @submit.prevent="register" >
+      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+     
       <label for="username" class="sr-only">Username</label>
       <b-col>
         <input
@@ -21,6 +24,7 @@
       <label for="password" class="sr-only">Password</label>
       <b-col>
         <input
+       
           type="password"
           id="password"
           class="form-control"
@@ -50,6 +54,7 @@
       </router-link>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
@@ -66,6 +71,7 @@ export default {
         confirmPassword: '',
         role: 'user',
       },
+      errors: [],
       registrationErrors: false,
     };
   },
@@ -91,6 +97,7 @@ export default {
             if (parsedData.success) {
               this.$router.push({ path: '/login', query: { registration: 'success' } });
             } else {
+              this.errors = parsedData.errors;
               this.registrationErrors = true;
             }
         })
@@ -100,6 +107,30 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.content{
+   position: relative;
+    top: 50%;
+    left: 42%;
+    margin-top: 55px;
+    margin-left: -50px;
+    width: 320px;
+    height: 400px;
+}
+
+
+form {
+  width: 300px;
+  display: absolute;
+  align-items: center;
+  justify-content: center;
+  
+}
+#message-container {
+  
+}
+
+
 </style>
 
