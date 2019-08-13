@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import auth from '@/auth.js'
+
 export default {
   props: {
     markers: Array,
@@ -90,6 +92,10 @@ export default {
       else {
         this.infoWinOpen = true;
         this.currentMidx = idx;
+      }
+
+      if (auth.getUser.rol === 'admin') {
+        this.$emit("selected", this.infoWinOpen);
       }
     }
   },

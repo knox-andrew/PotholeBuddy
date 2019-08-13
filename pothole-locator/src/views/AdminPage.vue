@@ -2,6 +2,11 @@
 
   <div class="content" id="container">
 
+    <h3 id="welcome">Welcome to the admin page.</h3>
+    <h4>Select a pothole to view details, update its status, or schedule it for repair. 
+        Additionally, selecting a pothole on the map will highlight it in the list. 
+        Select the marker's ID to schedule it for repair.</h4>
+
     <div id="list">
         <table>
       <tr>
@@ -10,9 +15,9 @@
         <th>Reported On</th>
         <th>Severity</th>
         <th>Comments</th>
-        <th>delete</th>
+        <th>Delete</th>
       </tr>
-      <tr v-for="marker in markers" :key="marker.id">
+      <tr class="selected" v-for="marker in markers" :key="marker.id">
         <td>{{marker.id}}</td>
         <td>{{marker.userName}}</td>
         <td>{{marker.reportDate.toString()}}</td>
@@ -23,7 +28,7 @@
     </table>
     </div>
     <div id="map">
-        <pothole-map style="height: 600px; width: 525px;" :markers="markers" />
+        <pothole-map ref="potholeMap" style="height: 600px; width: 525px;" :markers="markers" />
     </div>
 
   </div>
@@ -80,7 +85,7 @@ export default {
         })
         .catch(err => console.error(err));
       }
-     },
+     }
     },
   created() {
     fetch(this.apiURL + "markers")
@@ -121,5 +126,8 @@ tr th {
 tr td {
   padding: 10px;
   border: 1px solid black;
+}
+.selected {
+  background-color: rgba(149,38,38,0.7);
 }
 </style>
