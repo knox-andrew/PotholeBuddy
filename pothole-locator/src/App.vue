@@ -14,6 +14,7 @@
             @click="active = 'anonymous-view'"
             :to="{name: 'anonymous-view'}"
             :markers="markers"
+
           >View Potholes</b-nav-item>
           <b-nav-item
             :active="active === 'report'"
@@ -47,7 +48,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view :apiURL="apiURL" :markers="markers" />
+    <router-view :apiURL="apiURL" :markers="markers"  />
   </div>
 </template>
 <script>
