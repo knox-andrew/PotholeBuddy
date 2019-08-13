@@ -112,8 +112,10 @@ export default {
            },
            body: JSON.stringify(marker)
          })
+
         .then(parsedData => {
             this.marker = parsedData;
+
          })
         .then(this.showForm = false)
      },
