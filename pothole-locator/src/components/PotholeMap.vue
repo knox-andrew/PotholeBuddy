@@ -16,7 +16,7 @@
       v-for="(m,i) in markers"
       :position="getPosition(m)"
       :clickable="true"
-      @click="toggleInfoWindow(m,i)"
+      @click="toggleInfoWindow(m,i), $emit('mSelected', m.id)"
     ></gmap-marker>
     <gmap-marker 
       id="tempMarker" 
@@ -29,13 +29,14 @@
 </template>
 
 <script>
-import auth from '@/auth.js'
+// import auth from '@/auth.js'
 
 export default {
   props: {
     markers: Array,
     canReport: Boolean,
-    showTempMarker: Boolean
+    showTempMarker: Boolean,
+    selectedMarker: Number
   },
   data() {
     return {
@@ -94,13 +95,20 @@ export default {
         this.currentMidx = idx;
       }
 
-      if (auth.getUser.rol === 'admin') {
-        this.$emit("selected", this.infoWinOpen);
-      }
+      // if (auth.getUser.rol === 'admin') {
+      //   this.$emit("selected", this.infoWinOpen);
+      // }
     }
   },
   created() {
     //document.addEventListener('DOMContentLoaded')
+  },
+  watch: {
+    'selectedMarker': function(marker) {
+      if (marker != null) {
+        this.$refs.potholeMap.$mapObject.panTo(marker);
+      }
+    }
   }
 };
 </script>

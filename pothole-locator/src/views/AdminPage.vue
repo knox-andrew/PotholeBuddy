@@ -4,8 +4,8 @@
 
     <h3 id="welcome">Welcome to the admin page.</h3>
     <h4>Select a pothole to view details, update its status, or schedule it for repair. 
-        Additionally, selecting a pothole on the map will highlight it in the list. 
-        Select the marker's ID to schedule it for repair.</h4>
+        Additionally, selecting a pothole on the map will highlight it in the list, and 
+        selecting the marker's ID will pan the map to that marker.</h4>
 
     <div id="list">
         <table>
@@ -17,18 +17,18 @@
         <th>Comments</th>
         <th>Delete</th>
       </tr>
-      <tr class="selected" v-for="marker in markers" :key="marker.id">
-        <td>{{marker.id}}</td>
+      <tr :class="[marker.id === selectedRow ? 'selected' : '']" v-for="marker in markers" :key="marker.id">
+        <td class="hovered" @click="selectedMarker = {lat: marker.latitude, lng: marker.longitude}, selectedRow = marker.id">{{marker.id}}</td>
         <td>{{marker.userName}}</td>
         <td>{{marker.reportDate.toString()}}</td>
         <td>{{marker.rating}}</td>
         <td>{{marker.comments}}</td>
-        <td><button type="delete" v-on:click="deleteMarker(marker.id)">delete</button></td>
+        <td><b-button type="delete" variant="danger" v-on:click="deleteMarker(marker.id)">delete</b-button></td>
       </tr>
     </table>
     </div>
     <div id="map">
-        <pothole-map ref="potholeMap" style="height: 600px; width: 525px;" :markers="markers" />
+        <pothole-map ref="potholeMap" style="height: 600px; width: 525px;" :selectedMarker="selectedMarker" :markers="markers" @mSelected="markerSelected"/>
     </div>
 
   </div>
@@ -56,15 +56,19 @@ export default {
       mPosition: Object,
       rating: "",
       comments: "",
-       markers: []
+      markers: [],
+      selectedRow: 0,
+      selectedMarker: Object
     };
   },
   components: {
-    PotholeMap,
-
+    PotholeMap
  },
  
   methods: {
+    markerSelected(id) {
+      this.selectedRow = id;
+    },
     deleteMarker(id) {
         let result = confirm("Admin wait are you sure you want to delete this specific marker?");
         if (result) {
@@ -129,5 +133,9 @@ tr td {
 }
 .selected {
   background-color: rgba(149,38,38,0.7);
+}
+.hovered {
+  cursor: grab;
+  color: blue;
 }
 </style>
