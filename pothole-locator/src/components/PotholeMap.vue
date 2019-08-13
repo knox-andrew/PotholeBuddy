@@ -36,7 +36,7 @@ export default {
     markers: Array,
     canReport: Boolean,
     showTempMarker: Boolean,
-    selectedMarker: Number
+    selectedMarker: Function
   },
   data() {
     return {
@@ -94,10 +94,6 @@ export default {
         this.infoWinOpen = true;
         this.currentMidx = idx;
       }
-
-      // if (auth.getUser.rol === 'admin') {
-      //   this.$emit("selected", this.infoWinOpen);
-      // }
     }
   },
   created() {

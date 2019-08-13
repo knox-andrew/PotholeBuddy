@@ -1,22 +1,13 @@
 <template>
     <div>
-        <h2>Pothole Report Form</h2>
+        <h2>Schedule Repair Form</h2>
         <b-form>
-            <b-form-group label="Severity Level" label-for="severity">
-                <b-form-select v-model="severity" id="severity">
-                    <option value="Minor">Minor</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="serious">Serious</option>
-                    <option value="severe">Severe</option>
-                    <option value="critcal">Critical</option>
-                </b-form-select>
+            <b-form-group label="Date to be Repaired on" label-for="repair-date">
+                <b-form-input v-model="repairDate" id="repair-date" type="date"></b-form-input>
             </b-form-group>
-            <b-form-group label="Comments" label-for="comments">
-                <b-form-input type="text" placeholder="additional comments..." id="comments" v-model="comments"/>
-            </b-form-group>
-            <b-form-group label="Report Pothole?">
-                <button type="submit" @click.prevent="emitForm">Submit Report</button>
-                <button @click.prevent="$emit('wasCanceled')">Cancel</button>
+            <b-form-group label="Schedule Repair?">
+                <b-button variant="success" @click.prevent="$emit('submitted', repairDate)">Schedule</b-button>
+                <b-button @click.prevent="$emit('wasCanceled')" variant="danger">Cancel</b-button>
             </b-form-group>
         </b-form>
     </div>
@@ -28,17 +19,7 @@
             return {
                 center: {lat: 39.151898, lng: -84.4676563},
                 markers: [],
-                severity: '',
-                comments: ''
-            }
-        },
-        methods: {
-            emitForm() {
-                const formData = {
-                    rating: this.severity,
-                    comments: this.comments
-                }
-                this.$emit("submitted", formData);
+                repairDate: Date
             }
         }
     }
