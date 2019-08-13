@@ -1,7 +1,5 @@
 package com.techelevator.controller;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,12 +59,12 @@ public class MarkerController {
 	public List<Marker> list() {
 		return markerDao.getAllMarkers();
 	}
-	/*
-	@GetMapping("/{active}")
+	
+	@GetMapping("/active")
 	public List<Marker> activeList() {
 		return markerDao.getActiveMarkers();
 	}
-	*/
+	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

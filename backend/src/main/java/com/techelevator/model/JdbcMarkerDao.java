@@ -42,7 +42,7 @@ public class JdbcMarkerDao implements MarkerDao {
 		
 		String sql = "SELECT id, user_id, username, report_date, repair_date, latitude, longitude, rating, comments "
 				+ "FROM markers "
-				+ "WHERE repair_date < CURRENT_DATE";
+				+ "WHERE repair_date > CURRENT_DATE";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while(results.next()) {
