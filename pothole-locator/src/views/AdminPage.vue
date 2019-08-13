@@ -113,6 +113,7 @@ export default {
               this.markers.splice(index, 1);
             }
           })
+          .then(document.location.reload())
           .catch(err => console.error(err));
       }
     },
@@ -150,6 +151,17 @@ export default {
     hideForm() {
       this.showForm = false;
     }
+  },
+  showReportForm(id, marker) {
+    this.markerID = id;
+    this.marker = marker;
+    let result = confirm(`Schedule pothole with id of ${id} for repair?`);
+    if (result) {
+      this.showForm = true;
+    }
+  },
+  hideForm() {
+    this.showForm = false;
   }
 };
 </script>

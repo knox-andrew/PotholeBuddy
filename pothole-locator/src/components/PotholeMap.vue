@@ -9,6 +9,7 @@
       Severity: {{severity}}
       <br />
       Additional Info: {{comments}}
+      
     </gmap-info-window>
 
     <gmap-marker
