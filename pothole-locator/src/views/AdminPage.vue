@@ -113,7 +113,6 @@ export default {
               this.markers.splice(index, 1);
             }
           })
-          .then(document.location.reload())
           .catch(err => console.error(err));
       }
     },
