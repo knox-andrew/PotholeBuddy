@@ -13,18 +13,21 @@
             :active="active === 'anonymous-view'"
             @click="active = 'anonymous-view'"
             :to="{name: 'anonymous-view'}"
+            :markers="markers"
           >View Potholes</b-nav-item>
           <b-nav-item
             :active="active === 'report'"
             @click="active = 'report'"
             v-if="isLoggedIn()"
             :to="{name: 'report'}"
+            :markers="markers"
           >Report a Pothole</b-nav-item>
           <b-nav-item
             :active="active === 'administrator'"
             @click="active = 'administrator'"
             v-if="isAdmin()"
             :to="{name: 'administrator'}"
+            :markers="markers"
           >Admin View</b-nav-item>
         </b-navbar-nav>
 

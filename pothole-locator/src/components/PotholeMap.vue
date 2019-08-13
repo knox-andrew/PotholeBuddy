@@ -18,10 +18,10 @@
       :clickable="true"
       @click="toggleInfoWindow(m,i), $emit('mSelected', m.id)"
     ></gmap-marker>
-    <gmap-marker 
-      id="tempMarker" 
-      v-if="showTempMarker" 
-      :position="{lat: tempLat, lng: tempLng}" 
+    <gmap-marker
+      id="tempMarker"
+      v-if="showTempMarker"
+      :position="{lat: tempLat, lng: tempLng}"
       :clickable="false"
       :icon="{url:'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'}"
     ></gmap-marker>
@@ -100,7 +100,7 @@ export default {
     //document.addEventListener('DOMContentLoaded')
   },
   watch: {
-    'selectedMarker': function(marker) {
+    selectedMarker: function(marker) {
       if (marker != null) {
         this.$refs.potholeMap.$mapObject.panTo(marker);
       }
@@ -110,6 +110,5 @@ export default {
 </script>
 
 <style>
-
 </style>
 
