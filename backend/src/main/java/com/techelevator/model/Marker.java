@@ -8,6 +8,7 @@ public class Marker {
 	private long userId;
 	private String userName;
 	private LocalDate reportDate;
+	private LocalDate repairDate;
 	private double latitude;
 	private double longitude; 
 	private String rating;
@@ -36,6 +37,12 @@ public class Marker {
 	}
 	public void setReportDate(LocalDate reportDate) {
 		this.reportDate = reportDate;
+	}
+	public LocalDate getRepairDate() {
+		return repairDate;
+	}
+	public void setRepairDate(LocalDate repairDate) {
+		this.repairDate = repairDate;
 	}
 	public double getLatitude() {
 		return latitude;

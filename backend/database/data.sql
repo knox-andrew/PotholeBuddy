@@ -17,10 +17,14 @@ INSERT INTO markers ("user_id", "username", "latitude", "longitude", "rating", "
 VALUES (1, 'user', '39.193684289509065', '-84.32208179208072', 'moderate', 
         'Not too bad. Located on the left side of the road.');
 
-INSERT INTO markers ("user_id", "username", "latitude", "longitude", "rating", "comments") 
-VALUES (1, 'user', '39.22214908061195', '-84.36568378182682', 'critical', 
+INSERT INTO markers ("user_id", "username", "repair_date", "latitude", "longitude", "rating", "comments") 
+VALUES (1, 'user', '2019-11-22', '39.22214908061195', '-84.36568378182682', 'critical', 
         'Very deep and covers almost half the road. Cracked 2 of my rims');
 
 INSERT INTO markers ("user_id", "username", "latitude", "longitude", "rating", "comments") 
-VALUES (1, 'admin', '39.1869910813758509', ' -84.3931552624023311', 'severe', 
+VALUES (2, 'admin', '39.1869910813758509', '-84.3931552624023311', 'severe', 
         'Fairly deep and in the middle of the road. Definitely avoid.');
+
+INSERT INTO markers ("user_id", "username", "repair_date", "latitude", "longitude", "rating", "comments") 
+VALUES (2, 'admin', '2020-02-04', '39.1896520843638072', '-84.4727739548004024', 'moderate', 
+        'Moderately large pothole that fills with water every time it rains!!!');

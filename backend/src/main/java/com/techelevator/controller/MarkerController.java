@@ -1,5 +1,7 @@
 package com.techelevator.controller;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -58,16 +61,26 @@ public class MarkerController {
 	public List<Marker> list() {
 		return markerDao.getAllMarkers();
 	}
+	/*
+	@GetMapping("/{active}")
+	public List<Marker> activeList() {
+		return markerDao.getActiveMarkers();
+	}
+	*/
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Marker create(@RequestBody Marker marker) {
-		return markerDao.create(
-				marker.getUserId(), 
-				marker.getUserName(),
-				marker.getLatitude(), 
-				marker.getLongitude(), 
-				marker.getRating(), 
-				marker.getComments() );
+		return markerDao.create(marker );
+	}
+	
+	@PutMapping("/{id}")
+	public Marker update(@PathVariable long id, @RequestBody Marker marker) {
+		if(markerDao.getMarkerById(id) != null) {
+			markerDao.update(id, marker);
+		}
+		
+		return markerDao.getMarkerById(id);
+		
 	}
 }

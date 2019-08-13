@@ -11,7 +11,7 @@ private static final long serialVersionUID = 6974644855556556894L;
 	private long id;
 	
 	public MarkerIdNotFound(long id) {
-		super("Product Review Not Found!");
+		super("Marker Not Found!");
 		setId(id);
 	}
 
