@@ -30,7 +30,9 @@
 
         <b-navbar-nav v-if="isLoggedIn()" class="ml-auto">
           <b-nav-item-dropdown :text="getUserMessage()" right>
+            <!--
             <b-dropdown-item @click="active = '#'" href="#">View your reports</b-dropdown-item>
+            -->
             <b-dropdown-item-button @click.prevent="logout(), active='landing-page'">Logout</b-dropdown-item-button>
           </b-nav-item-dropdown>
         </b-navbar-nav>
