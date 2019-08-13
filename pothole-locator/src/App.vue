@@ -10,25 +10,26 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item
+            :active="active === 'potholes'"
+            :to="{name: 'potholes'}"
+            @click="active = 'potholes'"
+          >View & Report Potholes</b-nav-item>
+          <b-nav-item
             :active="active === 'anonymous-view'"
             @click="active = 'anonymous-view'"
             :to="{name: 'anonymous-view'}"
-            :markers="markers"
-
           >View Potholes</b-nav-item>
           <b-nav-item
             :active="active === 'report'"
             @click="active = 'report'"
             v-if="isLoggedIn()"
             :to="{name: 'report'}"
-            :markers="markers"
           >Report a Pothole</b-nav-item>
           <b-nav-item
             :active="active === 'administrator'"
             @click="active = 'administrator'"
             v-if="isAdmin()"
             :to="{name: 'administrator'}"
-            :markers="markers"
           >Admin View</b-nav-item>
         </b-navbar-nav>
 
@@ -48,7 +49,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view :apiURL="apiURL" :markers="markers"  />
+    <router-view :apiURL="apiURL" :markers="markers" />
   </div>
 </template>
 <script>
@@ -56,7 +57,7 @@ import auth from "@/auth.js";
 export default {
   data() {
     return {
-      apiURL: "http://localhost:8080/AuthenticationApplication/",
+      apiURL: "http://localhost:8080/PotholesCapstone/",
       markers: [],
       active: "home"
     };

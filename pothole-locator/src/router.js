@@ -6,6 +6,7 @@ import RegisterPage from "./views/RegisterPage.vue";
 import MapView from "./views/MapView.vue";
 import ReportPage from "./views/ReportPage.vue";
 import AdminPage from "./views/AdminPage.vue";
+import PotholesView from "./views/PotholesView.vue";
 import auth from "./auth";
 
 Vue.use(Router);
@@ -20,6 +21,15 @@ const router = new Router({
 			component: LandingPage,
 			meta: {
 				title: "PotholeBuddy",
+				requiredAuth: "none user admin"
+			}
+		},
+		{
+			path: "/potholes",
+			name: "potholes",
+			component: PotholesView,
+			meta: {
+				title: "View and Report Potholes",
 				requiredAuth: "none user admin"
 			}
 		},
