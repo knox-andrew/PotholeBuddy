@@ -1,7 +1,7 @@
 <template>
   <b-container class="p-5 mt-2 background">
     <b-row>
-      <b-col :cols="showForm ? 6 : 12">
+      <b-col cols="12" :md="showForm ? 6 : 12" class="mb-2">
         <pothole-map
           class="map"
           @mapClicked="mapClicked($event)"
@@ -11,8 +11,8 @@
         ></pothole-map>
       </b-col>
 
-      <b-col :cols="showForm ? 6 : 0">
-        <user-form v-if="showForm" v-on:wasCanceled="removeMarker" @submitted="submitted"></user-form>
+      <b-col v-if="showForm" cols="12" :md="showForm ? 6 : 0">
+        <user-form @canceled="canceled" @submitted="submitted"></user-form>
       </b-col>
     </b-row>
   </b-container>
@@ -30,14 +30,11 @@ export default {
   },
   data() {
     return {
-      showDismissibleAlert: true,
       showTempMarker: false,
       showForm: false,
       tempMarker: Object,
       currentUser: Object,
-      rating: "",
-      comments: "",
-      canReport: true
+      canReport: false
     };
   },
   components: {
@@ -57,12 +54,17 @@ export default {
       this.showTempMarker = false;
       this.showForm = false;
     },
+    canceled() {
+      this.showTempMarker = false;
+      this.showForm = false;
+    },
     submitted(formData) {
       const newMarker = {
         latitude: this.tempMarker.latitude,
         longitude: this.tempMarker.longitude,
+
         comments: formData.comments,
-        rating: formData.rating,
+        rating: formData.severity,
         userId: auth.getUser().uid,
         userName: auth.getUser().sub
       };
@@ -77,6 +79,11 @@ export default {
       this.showForm = false;
       this.showTempMarker = false;
     }
+  },
+  created() {
+    this.canReport =
+      auth.getUser() != null &&
+      (auth.getUser().rol === "user" || auth.getUser().rol === "admin");
   }
 };
 </script>

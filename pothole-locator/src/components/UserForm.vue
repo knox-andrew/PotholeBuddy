@@ -1,49 +1,49 @@
 <template>
-    <div>
-        <h2>Pothole Report Form</h2>
-        <b-form>
-            <b-form-group label="Severity Level" label-for="severity">
-                <b-form-select v-model="severity" id="severity">
-                    <option value="Minor">Minor</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="serious">Serious</option>
-                    <option value="severe">Severe</option>
-                    <option value="critcal">Critical</option>
-                </b-form-select>
-            </b-form-group>
-            <b-form-group label="Comments" label-for="comments">
-                <b-form-input type="text" placeholder="additional comments..." id="comments" v-model="comments"/>
-            </b-form-group>
-            <b-form-group label="Report Pothole?">
-                <button type="submit" @click.prevent="emitForm">Submit Report</button>
-                <button @click.prevent="$emit('wasCanceled')">Cancel</button>
-            </b-form-group>
-        </b-form>
-    </div>
+  <div>
+    <h2>Pothole Report Form</h2>
+    <b-form @submit.prevent="submitted" @reset.prevent="canceled">
+      <b-form-group label="Severity Level" label-for="severity">
+        <b-form-select v-model="form.severity" :options="severityLevels" id="severity" required></b-form-select>
+      </b-form-group>
+      <b-form-group label="Comments" label-for="comments">
+        <b-form-input type="text" placeholder="additional comments..." v-model="form.comments" />
+      </b-form-group>
+      <b-form-group label="Report Pothole?">
+        <b-button type="submit" variant="dark" class="mr-2">Submit Report</b-button>
+        <b-button type="reset" variant="dark">Cancel</b-button>
+      </b-form-group>
+    </b-form>
+  </div>
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                center: {lat: 39.151898, lng: -84.4676563},
-                markers: [],
-                severity: '',
-                comments: ''
-            }
-        },
-        methods: {
-            emitForm() {
-                const formData = {
-                    rating: this.severity,
-                    comments: this.comments
-                }
-                this.$emit("submitted", formData);
-            }
-        }
+export default {
+  data() {
+    return {
+      form: {
+        severity: null,
+        comments: ""
+      },
+      severityLevels: [
+        { text: "Choose Severity", value: null },
+        "Minor",
+        "Moderate",
+        "Serious",
+        "Severe",
+        "Critical"
+      ]
+    };
+  },
+  methods: {
+    submitted() {
+      this.$emit("submitted", this.form);
+    },
+    canceled() {
+      this.$emit("canceled");
     }
+  }
+};
 </script>
 
 <style>
-
 </style>
