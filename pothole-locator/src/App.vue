@@ -57,7 +57,7 @@ import auth from "@/auth.js";
 export default {
   data() {
     return {
-      apiURL: "http://localhost:8080/AuthenticationApplication/",
+      apiURL: "http://localhost:8080/PotholesCapstone/",
       markers: [],
       active: "home"
     };
