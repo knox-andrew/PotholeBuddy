@@ -1,11 +1,11 @@
 <template>
   <div class="content" id="container">
-    <h3 id="welcome">Welcome to the admin page.</h3>
-    <h4>
+    <h4 id="welcome">
       Select a pothole to view details.
       Additionally, selecting a pothole on the map will highlight it in the list, and
       selecting the marker's ID will pan the map to that marker.
     </h4>
+    <h5 id="tracking">Currently Tracking {{markers.length}} Potholes.</h5>
 
     <div id="list">
       <table>
@@ -41,7 +41,7 @@
             <b-button
               class="t-button"
               size="sm"
-              variant="success"
+              variant="dark"
               @click="showReportForm(marker.id, marker)"
             >schedule</b-button>
           </td>
@@ -51,7 +51,7 @@
     <div id="map">
       <pothole-map
         ref="potholeMap"
-        style="height: 550px; width: 525px;"
+        style="height: 75vh; width: 37vw;"
         :selectedMarker="selectedMarker"
         :markers="markers"
         @mSelected="markerSelected"
@@ -180,10 +180,12 @@ export default {
   padding: 30px;
   height: 100%;
   width: 45%;
+  
+
 }
 #list {
   padding: 30px;
-  width: 55%;
+  width: 51vw;
 }
 .halfMap {
   height: 600px;
@@ -214,5 +216,8 @@ tr td {
   border-radius: 10px;
   height: 75%;
   width: 50%;
+}
+#tracking {
+  width: 100%;
 }
 </style>

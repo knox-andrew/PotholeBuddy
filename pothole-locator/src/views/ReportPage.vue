@@ -1,9 +1,9 @@
 <template>
   <div class="content" id="container">
-    <h3 id="welcome">Welcome to the reporting page.</h3>
-    <h4>Each marker on the map represents a reported pothole.
+    <h4 id="welcome">Each marker on the map represents a reported pothole.
         You can click on a marker to view details about the pothole.</h4>
-    <h4>You can also click on the map where you would like to report a pothole, and fill out the short form.</h4>
+    <h4 id="welcome">You can also click on the map where you would like to report a pothole, and fill out the short form.</h4>
+    <h5 id="tracking">Currently Tracking {{markers.length}} Potholes.</h5>
     <div id="report-map">
       <pothole-map
         v-bind:class="[showForm ? 'halfMap' : 'fullScreen']"
@@ -101,11 +101,14 @@ export default {
   width: 45%;
 }
 .fullScreen {
-  height: 550px;
-  width: 1200px;
+  height: 75vh;
+  width: 80vw;
 }
 .halfMap {
-  height: 550px;
-  width: 600px;
+  height: 75vh;
+  width: 40vw;
+}
+#tracking {
+  width: 100%;
 }
 </style>

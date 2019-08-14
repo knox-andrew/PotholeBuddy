@@ -24,7 +24,6 @@
       <label for="password" class="sr-only">Password</label>
       <b-col>
         <input
-       
           type="password"
           id="password"
           class="form-control"

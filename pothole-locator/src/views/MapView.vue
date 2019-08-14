@@ -1,15 +1,14 @@
 <template>
   <div class="content" id="container">
     <header>
-      <h3 id="welcome">Welcome to the viewing page.</h3>
-      <h4>
+      <h4 id="welcome">
         Each marker on the map represents a reported pothole.
         You can click on a marker to view details about the pothole.
       </h4>
-      <p>Tracked potholes: {{markers.length}}</p>
+      <h5>Currently Tracking {{markers.length}} Potholes.</h5>
     </header>
     <div id="view-map">
-      <pothole-map :canReport="canReport" :markers="markers" style="width: 1225px; height: 550px"></pothole-map>
+      <pothole-map :canReport="canReport" :markers="markers" style="width: 90vw; height: 75vh"></pothole-map>
     </div>
   </div>
 </template>
