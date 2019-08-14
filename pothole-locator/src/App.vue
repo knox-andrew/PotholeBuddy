@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+  <div id="app" class="pb-2">
+    <b-navbar toggleable="lg" type="dark" variant="dark" sticky>
       <b-navbar-brand @click="active = 'landing-page'" :to="{name: 'landing-page'}">
         <b-img src="./assets/pothole_color.png" height="30px" class="pr-2" />PotholeBuddy
       </b-navbar-brand>
@@ -100,6 +100,12 @@ body {
   background-image: url("https://i.pinimg.com/originals/5f/c2/9c/5fc29ce899168b5abd2fb8faea9726f4.jpg");
   color: black;
 }
+
+.background {
+  background-color: rgba(200, 200, 200, 0.7);
+  border-radius: 10px;
+}
+
 .content {
   background-color: rgba(200, 200, 200, 0.7);
   border-radius: 10px;

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="p-4 mt-2 background">
     <b-row>
       <b-col :cols="showForm ? 6 : 12">
         <pothole-map
@@ -81,7 +81,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   text-align: center;
 }
@@ -104,14 +104,6 @@ export default {
   width: 100%;
 }
 .map {
-  height: 400px;
-  width: 100%;
-}
-.halfMap {
-  height: 550px;
-  width: 100%;
-}
-.hide {
-  width: 0%;
+  height: 500px;
 }
 </style>
