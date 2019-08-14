@@ -101,6 +101,11 @@ body {
   color: black;
 }
 
+.router-link-exact-active {
+  text-decoration-color: #fff;
+  background-color: rgb(56, 19, 223);
+}
+
 .background {
   background-color: rgba(200, 200, 200, 0.7);
   border-radius: 10px;

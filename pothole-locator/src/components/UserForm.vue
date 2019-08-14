@@ -9,8 +9,8 @@
         <b-form-input type="text" placeholder="additional comments..." v-model="form.comments" />
       </b-form-group>
       <b-form-group label="Report Pothole?">
-        <b-button type="submit" variant="dark" class="mr-2">Submit Report</b-button>
-        <b-button type="reset" variant="dark">Cancel</b-button>
+        <b-button type="submit" variant="primary" class="mr-2">Submit Report</b-button>
+        <b-button type="reset" variant="primary">Cancel</b-button>
       </b-form-group>
     </b-form>
   </div>
