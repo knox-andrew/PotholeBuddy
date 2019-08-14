@@ -48,6 +48,7 @@
         </tr>
       </table>
     </div>
+    <div id="placeholder"></div>
     <div id="map">
       <pothole-map
         ref="potholeMap"
@@ -179,8 +180,14 @@ export default {
   padding: 30px;
   height: 100%;
   width: 45%;
-  
-
+  position: fixed;
+  left: 55vw;
+  top: 25vh;
+}
+#placeholder {
+  height: 100%;
+  width: 45%;
+  padding: 30px;
 }
 #list {
   padding: 30px;
