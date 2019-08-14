@@ -26,9 +26,9 @@
             :to="{name: 'report'}"
           >Report a Pothole</b-nav-item>
           <b-nav-item
+            v-if="isAdmin()"
             :active="active === 'administrator'"
             @click="active = 'administrator'"
-            v-if="isAdmin()"
             :to="{name: 'administrator'}"
           >Admin View</b-nav-item>
         </b-navbar-nav>
