@@ -1,5 +1,5 @@
 <template>
-  <b-container class="p-4 mt-2 background">
+  <b-container class="p-5 mt-2 background">
     <b-row>
       <b-col :cols="showForm ? 6 : 12">
         <pothole-map
