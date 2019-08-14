@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.Size;
  * User
  */
 public class User {
-	@Size(min=4, max=30, message="username size must be between 4 and 30")
+	@Size(min=4, max=30, message="username length must be between 4 and 30 ")
     @NotBlank(message = "Username is required")
     private String username;
 
@@ -17,7 +18,8 @@ public class User {
     private String role;
     private long id;
 
-    @Size(min=4, max=30, message="passwords size must be between 4 and 30")
+    @Pattern(regexp = "^[\\p{Alnum}]{4,30}$", message="Must be alphanumeric")
+    @Size(min=4, max=30, message="passwords length must be between 4 and 30")
     @NotBlank(message = "Password is required")
     private String password;
     private String confirmPassword;

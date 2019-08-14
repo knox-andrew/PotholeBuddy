@@ -1,7 +1,9 @@
 <template>
 <div>
  <div id="message-container" class="alert alert-danger" role="alert" v-if="registrationErrors">
-      {{errors}}
+   <ul>
+      {{errors.toString()}}
+      </ul>
       </div>
   <div id="register" class="content">
     
@@ -126,9 +128,7 @@ form {
   justify-content: center;
   
 }
-#message-container {
-  
-}
+
 
 
 </style>
