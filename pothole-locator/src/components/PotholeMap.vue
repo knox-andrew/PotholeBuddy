@@ -7,11 +7,11 @@
       @closeclick="infoWinOpen=false"
     >
       Severity: {{severity}}
-      <br>
+      <br />
       Additional Info: {{comments}}
-      <br>
-      To be Repaired On: {{repairDate != null ? `${repairDate}` : 'Not Scheduled'}}
+      <br />
 
+      To be Repaired On: {{repairDate != null ? `${repairDate}` : 'Not Scheduled'}}
     </gmap-info-window>
 
     <gmap-marker
@@ -73,8 +73,8 @@ export default {
       this.infoWinOpen = false;
       if (this.canReport) {
         this.$refs.potholeMap.$mapObject.panTo(event.latLng);
-        if (this.$refs.potholeMap.$mapObject.getZoom() != 13) {
-          this.$refs.potholeMap.$mapObject.setZoom(13);
+        if (this.$refs.potholeMap.$mapObject.getZoom() != 15) {
+          this.$refs.potholeMap.$mapObject.setZoom(15);
         }
         this.tempLat = event.latLng.lat();
         this.tempLng = event.latLng.lng();

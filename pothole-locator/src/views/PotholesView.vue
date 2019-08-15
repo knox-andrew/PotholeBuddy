@@ -1,7 +1,7 @@
 <template>
   <div class="p-5 mt-2 content">
     <b-row>
-      <b-col cols="12" md="7" class="mb-2">
+      <b-col cols="12" md="8" class="mb-2">
         <pothole-map
           class="map"
           @mapClicked="mapClicked($event)"
@@ -10,7 +10,7 @@
           :showTempMarker="showTempMarker"
         ></pothole-map>
       </b-col>
-      <b-col cols="12" md="5">
+      <b-col cols="12" md="4">
         <div v-if="reportStage === 0">
           <div v-if="canReport">
             <b-card>
