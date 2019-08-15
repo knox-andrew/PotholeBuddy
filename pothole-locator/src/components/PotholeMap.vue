@@ -20,6 +20,7 @@
       :position="getPosition(m)"
       :clickable="true"
       @click="toggleInfoWindow(m,i), $emit('mSelected', m.id)"
+      :icon="{url: 'https://img.icons8.com/offices/30/000000/map-pin.png'}"
     ></gmap-marker>
     <gmap-marker
       id="tempMarker"

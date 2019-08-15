@@ -62,6 +62,7 @@ export default {
       auth.logout();
       this.$router.push("/");
       this.$forceUpdate();
+      document.location.reload();
     },
     getRole() {
       return this.isLoggedIn() ? auth.getUser().rol : "";

@@ -24,18 +24,28 @@
         for anyone to view and avoid.
       </h3>
     </div>
-    <div id="user-info">
+    <div class="user-info">
       If you wish to view potholes in the area,
       <router-link :to="{name: 'anonymous-view'}">click here</router-link>.
-      <br />To contribute and report any potholes you find, you can
-      <router-link :to="{name: 'login'}">login</router-link>or
+    </div>
+    <div class="user-info" v-if="isLoggedIn()">
+      To contribute and report any potholes you find, you can
+      <router-link :to="{name: 'login'}">login</router-link> or
       <router-link :to="{name: 'register'}">register for a free account</router-link>.
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import auth from '@/auth.js'
+
+export default {
+  methods: {
+    isLoggedIn() {
+      return auth.getUser() === null;
+    }
+  }
+};
 </script>
 
 <style>
@@ -46,7 +56,7 @@ export default {};
   line-height: 2;
   padding: 30px;
 }
-#user-info {
+.user-info {
   line-height: 1.5;
   font-size: 1.5em;
   font-weight: bold;

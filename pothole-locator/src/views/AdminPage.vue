@@ -8,7 +8,7 @@
     <h5 id="tracking">Currently Tracking {{markers.length}} Potholes.</h5>
 
     <div id="list">
-      <table>
+      <table class="table-striped">
         <tr>
           <th>Marker ID</th>
           <th>Reported By : <br> yyyy-mm-dd</th>
@@ -173,13 +173,16 @@ export default {
 tr th {
   padding: 10px;
   border: 1px solid black;
+  background-color: rgba(199, 199, 199, 0.7);
 }
 tr td {
   padding: 10px;
   border: 1px solid black;
+  background-color: rgba(199, 199, 199, 0.7);
 }
+
 .selected {
-  background-color: rgba(120, 120, 120, 0.7);
+  background-color: rgba(80, 80, 80, 1);
 }
 .id {
   cursor: grab;
@@ -193,7 +196,7 @@ tr td {
   position: fixed;
   border-radius: 10px;
   height: 40vh;
-  width: 45vw;
+  width: 40vw;
 }
 #tracking {
   width: 100%;
