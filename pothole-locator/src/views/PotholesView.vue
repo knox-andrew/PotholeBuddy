@@ -1,5 +1,5 @@
 <template>
-  <b-container class="p-5 mt-2 background">
+  <div class="p-5 mt-2 content">
     <b-row>
       <b-col cols="12" md="7" class="mb-2">
         <pothole-map
@@ -59,7 +59,7 @@
         </div>
       </b-col>
     </b-row>
-  </b-container>
+  </div>
 </template>
 
 <script>
