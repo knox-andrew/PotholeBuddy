@@ -104,6 +104,7 @@ body {
 .router-link-exact-active {
   text-decoration-color: #fff;
   background-color: rgb(56, 19, 223);
+  border-radius: 10px;
 }
 
 .background {

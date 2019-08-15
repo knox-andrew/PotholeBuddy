@@ -2,12 +2,16 @@ package com.techelevator.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Marker {
 	
 	private long id;
 	private long userId;
 	private String userName;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate reportDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate repairDate;
 	private double latitude;
 	private double longitude; 

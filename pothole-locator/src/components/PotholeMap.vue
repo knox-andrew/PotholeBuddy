@@ -7,8 +7,10 @@
       @closeclick="infoWinOpen=false"
     >
       Severity: {{severity}}
-      <br />
+      <br>
       Additional Info: {{comments}}
+      <br>
+      To be Repaired On: {{repairDate != null ? `${repairDate}` : 'Not Scheduled'}}
 
     </gmap-info-window>
 
@@ -46,6 +48,7 @@ export default {
       center: { lat: 39.151898, lng: -84.4676563 },
       severity: "",
       comments: "",
+      repairDate: null,
       infoWindowPos: null,
       infoWinOpen: false,
       currentMidx: null,
@@ -86,6 +89,7 @@ export default {
       this.infoWindowPos = this.getPosition(marker);
       this.severity = marker.rating;
       this.comments = marker.comments;
+      this.repairDate = marker.repairDate;
       //check if its the same marker that was selected if yes toggle
       if (this.currentMidx == idx) {
         this.infoWinOpen = !this.infoWinOpen;
@@ -103,7 +107,7 @@ export default {
   watch: {
     selectedMarker: function(marker) {
       if (marker != null) {
-        this.$refs.potholeMap.$mapObject.panTo(marker);
+        this.toggleInfoWindow(marker, marker.id);
       }
     }
   }

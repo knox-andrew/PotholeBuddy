@@ -24,13 +24,19 @@
         >
           <td
             class="id"
-            @click="selectedMarker = {lat: marker.latitude, lng: marker.longitude}, selectedRow = marker.id"
+            @click="selectedMarker = marker, selectedRow = marker.id"
           >{{marker.id}}</td>
-          <td>{{marker.userName}} on {{marker.reportDate.toString()}}</td>
-          <td>{{marker.repairDate != null ? `${marker.repairDate.toString()}` : 'active'}}</td>
+          <td>{{`${marker.userName} on ${marker.reportDate}`}}</td>
+          <td>{{marker.repairDate != null ? `${marker.repairDate}` : 'Not Scheduled'}}</td>
           <td>{{marker.rating}}</td>
           <td>{{marker.comments}}</td>
           <td>
+            <b-button
+              class="t-button"
+              size="sm"
+              variant="dark"
+              @click="showReportForm(marker.id, marker), selectedRow = marker.id, selectedMarker = marker"
+            >{{marker.repairDate != null ? 'reschedule' : 'schedule'}}</b-button>
             <b-button
               class="t-button"
               size="sm"
@@ -38,12 +44,6 @@
               variant="danger"
               @click="deleteMarker(marker.id)"
             >delete</b-button>
-            <b-button
-              class="t-button"
-              size="sm"
-              variant="dark"
-              @click="showReportForm(marker.id, marker)"
-            >schedule</b-button>
           </td>
         </tr>
       </table>
@@ -52,7 +52,7 @@
     <div id="map">
       <pothole-map
         ref="potholeMap"
-        style="height: 75vh; width: 37vw;"
+        style="height: 65vh; width: 37vw;"
         :selectedMarker="selectedMarker"
         :markers="markers"
         @mSelected="markerSelected"
@@ -96,9 +96,7 @@ export default {
       this.selectedRow = id;
     },
     deleteMarker(id) {
-      let result = confirm(
-        "Admin wait are you sure you want to delete this specific marker?"
-      );
+      let result = confirm(`WAIT! Are you sure you want to delete marker with ID of ${id}?`);
       if (result) {
         fetch(this.apiURL + "markers/" + `${id}`, {
           method: "DELETE",
@@ -120,12 +118,12 @@ export default {
     updateMarker(repairDate, id, marker) {
       id = this.markerID;
       marker = this.marker;
-      const array = repairDate.split("-");
-      const dateArray = [];
-      for (let i = 0; i < array.length; i++) {
-        dateArray.push(parseInt(array[i]));
-      }
-      marker.repairDate = dateArray;
+      // const array = repairDate.split("-");
+      // const dateArray = [];
+      // for (let i = 0; i < array.length; i++) {
+      //   dateArray.push(parseInt(array[i]));
+      // }
+      marker.repairDate = repairDate;
       fetch(this.apiURL + "markers/" + `${id}`, {
         method: "PUT",
         headers: {
@@ -143,25 +141,11 @@ export default {
     showReportForm(id, marker) {
       this.markerID = id;
       this.marker = marker;
-      let result = confirm(`Schedule pothole with id of ${id} for repair?`);
-      if (result) {
-        this.showForm = true;
-      }
+      this.showForm = true;
     },
     hideForm() {
       this.showForm = false;
     }
-  },
-  showReportForm(id, marker) {
-    this.markerID = id;
-    this.marker = marker;
-    let result = confirm(`Schedule pothole with id of ${id} for repair?`);
-    if (result) {
-      this.showForm = true;
-    }
-  },
-  hideForm() {
-    this.showForm = false;
   }
 };
 </script>
@@ -178,7 +162,6 @@ export default {
 }
 #map {
   padding: 30px;
-  height: 100%;
   width: 45%;
   position: fixed;
   left: 55vw;
@@ -217,11 +200,10 @@ tr td {
 }
 #repair-form {
   background-color: rgb(255, 255, 255);
-  position: absolute;
-  float: left;
+  position: fixed;
   border-radius: 10px;
-  height: 75%;
-  width: 50%;
+  height: 40vh;
+  width: 45vw;
 }
 #tracking {
   width: 100%;
