@@ -89,10 +89,11 @@ body {
   background-image: url("https://i.pinimg.com/originals/5f/c2/9c/5fc29ce899168b5abd2fb8faea9726f4.jpg");
   color: black;
 }
-
+/*
 .router-link-exact-active {
   font-weight: bold;
 }
+*/
 
 .background {
   background-color: rgba(200, 200, 200, 0.7);
