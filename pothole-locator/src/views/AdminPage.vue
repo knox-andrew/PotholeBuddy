@@ -152,64 +152,6 @@ export default {
 
 
 <style>
-/* * {
-  text-align: center;
-}
-table .fixed_header thead th{
-right: 700px;
-}
- #container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-} 
-#map {
-  padding: 30px;
-  width: 45%;
-  position: fixed;
-  left: 55vw;
-  top: 25vh;
-}
-#placeholder {
-  height: 100%;
-  width: 40vw;
-  padding: 30px;
-}
- #list {
-  padding: 20px;
-  width: 51vw;
-} 
- tr th {
-  padding: 100px;
-  
-  
-}
-tr td {
-  padding: 100px;
- border: 1px, black;
-  
-}
-
-.selected {
-  background-color: rgba(120, 120, 120, 0.7);
-} 
-.id {
-  cursor: grab;
-  color: blue;
-}
-.t-button {
-  margin: 2px;
-}
-#repair-form {
-  background-color: rgb(255, 255, 255);
-  position: fixed;
-  border-radius: 10px;
-  height: 40vh;
-  width: 40vw;
-}
-#tracking {
-  width: 100%;
-} */
 #tracking {
   width: 100%;
 } 
@@ -231,11 +173,6 @@ tr td {
   left: 55vw;
   top: 25vh;
 }
- /* #container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}  */
 table{
   background-color: white;
 }
