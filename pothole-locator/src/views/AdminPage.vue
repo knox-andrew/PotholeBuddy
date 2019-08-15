@@ -11,10 +11,9 @@
       <table>
         <tr>
           <th>Marker ID</th>
-          <th>Reported By : On</th>
-          <th>To be repaired on</th>
+          <th>Reported By : <br> yyyy-mm-dd</th>
+          <th>To be repaired <br> yyyy-mm-dd</th>
           <th>Severity</th>
-          <th>Comments</th>
           <th>Delete / Schedule</th>
         </tr>
         <tr
@@ -26,10 +25,9 @@
             class="id"
             @click="selectedMarker = marker, selectedRow = marker.id"
           >{{marker.id}}</td>
-          <td>{{`${marker.userName} on ${marker.reportDate}`}}</td>
+          <td>{{`${marker.userName} on `}} <br> {{`${marker.reportDate}`}}</td>
           <td>{{marker.repairDate != null ? `${marker.repairDate}` : 'Not Scheduled'}}</td>
           <td>{{marker.rating}}</td>
-          <td>{{marker.comments}}</td>
           <td>
             <b-button
               class="t-button"
@@ -37,6 +35,7 @@
               variant="dark"
               @click="showReportForm(marker.id, marker), selectedRow = marker.id, selectedMarker = marker"
             >{{marker.repairDate != null ? 'reschedule' : 'schedule'}}</b-button>
+            <br>
             <b-button
               class="t-button"
               size="sm"
@@ -52,7 +51,7 @@
     <div id="map">
       <pothole-map
         ref="potholeMap"
-        style="height: 65vh; width: 37vw;"
+        style="height: 53vh; width: 37vw;"
         :selectedMarker="selectedMarker"
         :markers="markers"
         @mSelected="markerSelected"
@@ -118,11 +117,6 @@ export default {
     updateMarker(repairDate, id, marker) {
       id = this.markerID;
       marker = this.marker;
-      // const array = repairDate.split("-");
-      // const dateArray = [];
-      // for (let i = 0; i < array.length; i++) {
-      //   dateArray.push(parseInt(array[i]));
-      // }
       marker.repairDate = repairDate;
       fetch(this.apiURL + "markers/" + `${id}`, {
         method: "PUT",
@@ -169,16 +163,12 @@ export default {
 }
 #placeholder {
   height: 100%;
-  width: 45%;
+  width: 40vw;
   padding: 30px;
 }
 #list {
   padding: 30px;
   width: 51vw;
-}
-.halfMap {
-  height: 600px;
-  width: 600px;
 }
 tr th {
   padding: 10px;

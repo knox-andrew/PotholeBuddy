@@ -3,7 +3,7 @@
         <h2>Schedule Repair Form</h2>
         <b-form>
             <b-form-group label="Date to be Repaired on" label-for="repair-date">
-                <b-form-input v-model="repairDate" id="repair-date" type="date" required="true"></b-form-input>
+                <b-form-input id="input-live" v-model="repairDate" :state="dateState" type="date" required="true"></b-form-input>
             </b-form-group>
             <b-form-group label="Schedule Repair?">
                 <b-button variant="success" @click.prevent="$emit('submitted', repairDate)">Schedule</b-button>
@@ -17,6 +17,11 @@
     export default {
         props: {
             repairDate: Date
+        },
+        computed: {
+            dateState() {
+                return this.repairDate != null ? true : false;
+            }
         },
         data () {
             return {
