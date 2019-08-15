@@ -1,6 +1,6 @@
 <template>
 <div>
- <b-alert v-for="error in errors" :key="error.id" v-model="showDismissibleAlert" variant="danger" show dismissible fade :v-if="registrationErrors" >
+ <b-alert v-for="error in errors" :key="error.id"  :v-if="showDismissibleAlert" variant="danger" show dismissible fade >
    
   {{error.toString()}}
   
@@ -46,7 +46,7 @@
         />
       </b-col>
       <br>
-      <button  @click="showDismissibleAlert=registrationErrors" variant="info" class="btn btn-lg btn-primary" type="submit" >
+      <button  variant="info" class="btn btn-lg btn-primary" type="submit" >
         Create Account
       </button>
       <br> <br>
@@ -94,6 +94,7 @@ export default {
             return (response.json());
           }
           else {
+            this.showDismissibleAlert = true;
             this.registrationErrors = true;
             throw 'Register returned: ' + response.status;
           }
@@ -104,7 +105,7 @@ export default {
             } else {
               this.errors = parsedData.errors;
               this.registrationErrors = true;
-              
+              this.showDismissibleAlert = true;
             }
         })
         .catch((err) => console.log(err));
