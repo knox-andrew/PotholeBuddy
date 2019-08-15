@@ -1,5 +1,5 @@
 <template>
-  <div class="content" id="container">
+  <div class="content" id="container" style="padding-bottom: 50px; padding-left: 30px;">
     <h4 id="welcome">
       Select a pothole to view details.
       Additionally, selecting a pothole on the map will highlight it in the list, and
@@ -156,7 +156,7 @@ export default {
   width: 100%;
 } 
 .selected {
-  background-color: darkgray;
+  background-color: rgba(90,90,90,0.9);
 }
 .id {
   cursor: grab;
@@ -171,34 +171,30 @@ export default {
   width: 45%;
   position: fixed;
   left: 55vw;
-  top: 25vh;
+  top: 23vh;
 }
 table{
-  background-color: white;
+  background-color: rgba(190,190,190,0.7);
 }
- tr th {
+th {
   padding: 100px;
 }
 tr td {
   padding: 100px;
- border-bottom: 1px solid black;
-   
+  border-bottom: 1px solid black;
 }
 .fixed_header thead{
     width: 5vw;
     table-layout: fixed;
     border-collapse: collapse;
-    background-color: white;
-     border-bottom: 1px solid black;
+    background-color: rgba(190,190,190,0.7);
+    border-bottom: 1px solid black;
 }
-
 .fixed_header tbody{
   display:block;
   width: 100%;
   overflow: auto;
   height: 400px;
- 
-  
 }
 
 .fixed_header thead tr {
