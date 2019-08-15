@@ -34,7 +34,7 @@
               </b-card-header>
               <b-card-body>
                 <b-button @click.prevent="goToLogin" variant="primary" class="mr-4 mb-2">Login</b-button>
-                <b-button @click.prevent="goToRegister" variant="primary">Register</b-button>
+                <b-button @click.prevent="goToRegister" variant="primary" class="mr-4 mb-2">Register</b-button>
               </b-card-body>
             </b-card>
           </div>

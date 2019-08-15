@@ -15,17 +15,6 @@
             @click="active = 'potholes'"
           >View & Report Potholes</b-nav-item>
           <b-nav-item
-            :active="active === 'anonymous-view'"
-            @click="active = 'anonymous-view'"
-            :to="{name: 'anonymous-view'}"
-          >View Potholes</b-nav-item>
-          <b-nav-item
-            :active="active === 'report'"
-            @click="active = 'report'"
-            v-if="isLoggedIn()"
-            :to="{name: 'report'}"
-          >Report a Pothole</b-nav-item>
-          <b-nav-item
             v-if="isAdmin()"
             :active="active === 'administrator'"
             @click="active = 'administrator'"
@@ -102,7 +91,6 @@ body {
 }
 
 .router-link-exact-active {
-  text-decoration-color: #fff;
   background-color: rgb(56, 19, 223);
 }
 
