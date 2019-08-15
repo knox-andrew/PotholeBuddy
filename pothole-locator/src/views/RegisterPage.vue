@@ -1,8 +1,10 @@
 <template>
 <div>
- <div id="message-container" class="alert alert-danger" role="alert" v-if="registrationErrors">
-   {{errors.toString()}}
-      </div>
+ <b-alert v-for="error in errors" :key="error.id" v-model="showDismissibleAlert" variant="danger" show dismissible fade :v-if="registrationErrors" >
+   
+  {{error.toString()}}
+  
+ </b-alert>
   <div id="register" class="content">
     
     <form class="form-register" @submit.prevent="register" >
@@ -44,7 +46,7 @@
         />
       </b-col>
       <br>
-      <button class="btn btn-lg btn-primary" type="submit" >
+      <button  @click="showDismissibleAlert=registrationErrors" variant="info" class="btn btn-lg btn-primary" type="submit" >
         Create Account
       </button>
       <br> <br>
@@ -74,6 +76,7 @@ export default {
         
       ],
       registrationErrors: false,
+      showDismissibleAlert: false
     };
   },
   methods: {
