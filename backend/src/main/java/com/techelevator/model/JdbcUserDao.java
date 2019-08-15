@@ -8,6 +8,8 @@ import javax.sql.DataSource;
 
 import com.techelevator.authentication.PasswordHasher;
 
+import org.hibernate.validator.constraints.UniqueElements;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -47,16 +49,19 @@ public class JdbcUserDao implements UserDao {
         byte[] salt = passwordHasher.generateRandomSalt();
         String hashedPassword = passwordHasher.computeHash(password, salt);
         String saltString = new String(Base64.getEncoder().encode(salt));
+        try {
         long newId = jdbcTemplate.queryForObject(
                 "INSERT INTO users(username, password, salt, role) VALUES (?, ?, ?, ?) RETURNING id", Long.class,
                 userName, hashedPassword, saltString, role);
-
         User newUser = new User();
         newUser.setId(newId);
         newUser.setUsername(userName);
         newUser.setRole(role);
-
         return newUser;
+        }catch(Exception e){
+        	return null;
+        }
+        
     }
 
     @Override

@@ -51,8 +51,13 @@ public class AccountController {
             }
         }
     	else {
-    		auth.register(user.getUsername(), user.getPassword(), user.getRole());
-    		registrationResult.setSuccess(true);
+    		boolean success = auth.register(user.getUsername(), user.getPassword(), user.getRole());
+    		if(success) {
+    			registrationResult.setSuccess(true);
+    		}else {
+    			 registrationResult.addError("That account already exists");
+    		}
+    		
     	}
     	return registrationResult;
     }

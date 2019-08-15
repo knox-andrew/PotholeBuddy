@@ -1,9 +1,7 @@
 <template>
 <div>
  <div id="message-container" class="alert alert-danger" role="alert" v-if="registrationErrors">
-   <ul>
-      {{errors.toString()}}
-      </ul>
+   {{errors.toString()}}
       </div>
   <div id="register" class="content">
     
@@ -46,7 +44,7 @@
         />
       </b-col>
       <br>
-      <button class="btn btn-lg btn-primary" type="submit">
+      <button class="btn btn-lg btn-primary" type="submit" >
         Create Account
       </button>
       <br> <br>
@@ -72,7 +70,9 @@ export default {
         confirmPassword: '',
         role: 'user',
       },
-      errors: [],
+      errors: [
+        
+      ],
       registrationErrors: false,
     };
   },
@@ -89,7 +89,8 @@ export default {
         .then((response) => {
           if (response.ok) {
             return (response.json());
-          } else {
+          }
+          else {
             this.registrationErrors = true;
             throw 'Register returned: ' + response.status;
           }
@@ -100,6 +101,7 @@ export default {
             } else {
               this.errors = parsedData.errors;
               this.registrationErrors = true;
+              
             }
         })
         .catch((err) => console.log(err));
