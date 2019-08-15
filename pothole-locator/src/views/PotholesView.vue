@@ -47,6 +47,7 @@
             </b-card-header>
             <b-card-body>
               <p>Click a location on the map to place a pothole pin</p>
+              <b-button @click.prevent="canceled" variant="primary">Cancel</b-button>
             </b-card-body>
           </b-card>
         </div>
