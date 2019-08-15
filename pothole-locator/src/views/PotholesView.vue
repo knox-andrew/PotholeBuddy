@@ -1,5 +1,6 @@
 <template>
   <div class="p-5 mt-2 content">
+    <h4 id="tracking-header">Currently Tracking {{markers.length}} Potholes.</h4>
     <b-row>
       <b-col cols="12" md="8" class="mb-2">
         <pothole-map
@@ -152,6 +153,10 @@ export default {
 <style scoped>
 * {
   text-align: center;
+}
+#tracking-header {
+  margin-bottom: 40px;
+  color: rgb(132, 26, 26);
 }
 #container {
   display: flex;

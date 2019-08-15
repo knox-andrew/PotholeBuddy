@@ -28,7 +28,7 @@
       If you wish to view potholes in the area,
       <router-link :to="{name: 'potholes'}">click here</router-link>.
       <br />To contribute and report any potholes you find, you can
-      <router-link :to="{name: 'login'}">login</router-link>or
+      <router-link :to="{name: 'login'}">login</router-link> or
       <router-link :to="{name: 'register'}">register for a free account</router-link>.
     </div>
   </div>
