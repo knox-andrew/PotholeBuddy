@@ -183,6 +183,15 @@ tr td {
   padding: 100px;
   border-bottom: 1px solid black;
 }
+#repair-form {
+  background-color: white;
+  border-radius: 5px;
+  position: absolute;
+  top: 25vh;
+  left: 25vw;
+  height: 30vh;
+  width: 45vw;
+}
 .fixed_header thead{
     width: 5vw;
     table-layout: fixed;
