@@ -7,15 +7,18 @@
     </h4>
     <h5 id="tracking">Currently Tracking {{markers.length}} Potholes.</h5>
 
-    <div id="list">
-      <table>
+    <div>
+      <table id="list" class="fixed_header">
+        <thead>
         <tr>
           <th>Marker ID</th>
-          <th>Reported By : <br> yyyy-mm-dd</th>
-          <th>To be repaired <br> yyyy-mm-dd</th>
+          <th>Reported By:<br>yyyy-mm-dd</th>
+          <th>To be repaired<br>yyyy-mm-dd</th>
           <th>Severity</th>
           <th>Delete / Schedule</th>
         </tr>
+        </thead>
+        <tbody>
         <tr
           :class="[marker.id === selectedRow ? 'selected' : '']"
           v-for="marker in markers"
@@ -45,6 +48,7 @@
             >delete</b-button>
           </td>
         </tr>
+        </tbody>
       </table>
     </div>
     <div id="placeholder"></div>
@@ -60,7 +64,9 @@
     <div id="repair-form" v-if="showForm === true">
       <admin-form v-on:wasCanceled="hideForm" v-on:submitted="updateMarker"></admin-form>
     </div>
+   
   </div>
+  
 </template>
 
 <script>
@@ -82,7 +88,7 @@ export default {
       selectedRow: 0,
       selectedMarker: Object,
       markerID: 0,
-      marker: Object
+      marker: Object,
     };
   },
   components: {
@@ -146,14 +152,17 @@ export default {
 
 
 <style>
-* {
+/* * {
   text-align: center;
 }
-#container {
+table .fixed_header thead th{
+right: 700px;
+}
+ #container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-}
+} 
 #map {
   padding: 30px;
   width: 45%;
@@ -166,21 +175,23 @@ export default {
   width: 40vw;
   padding: 30px;
 }
-#list {
-  padding: 30px;
+ #list {
+  padding: 20px;
   width: 51vw;
-}
-tr th {
-  padding: 10px;
-  border: 1px solid black;
+} 
+ tr th {
+  padding: 100px;
+  
+  
 }
 tr td {
-  padding: 10px;
-  border: 1px solid black;
+  padding: 100px;
+ border: 1px, black;
+  
 }
 .selected {
   background-color: rgba(120, 120, 120, 0.7);
-}
+} 
 .id {
   cursor: grab;
   color: blue;
@@ -197,5 +208,73 @@ tr td {
 }
 #tracking {
   width: 100%;
+} */
+#tracking {
+  width: 100%;
+} 
+.selected {
+  background-color: darkgray;
+}
+.id {
+  cursor: grab;
+  color: blue;
+}
+#list{
+  left: 55vw;
+  width: 50vw;
+}
+#map {
+  padding: 30px;
+  width: 45%;
+  position: fixed;
+  left: 55vw;
+  top: 25vh;
+}
+ /* #container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}  */
+table{
+  background-color: white;
+}
+ tr th {
+  padding: 100px;
+}
+tr td {
+  padding: 100px;
+ border-bottom: 1px solid black;
+   
+}
+.fixed_header thead{
+    width: 5vw;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background-color: white;
+     border-bottom: 1px solid black;
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 400px;
+ 
+  
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+
+.fixed_header thead {
+  color:black;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 1px;
+  text-align: left;
+  width: 10vw;
+ 
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div>
- <b-alert v-for="error in errors" :key="error.id"  :v-if="showDismissibleAlert" variant="danger" show dismissible fade >
+ <b-alert id="alert" v-for="error in errors" :key="error.id"  :v-if="showDismissibleAlert" variant="danger" show dismissible fade >
    
   {{error.toString()}}
   
@@ -135,7 +135,10 @@ form {
   
 }
 
-
+#alert {
+left: 32%;
+width: 35%;
+}
 
 </style>
 
