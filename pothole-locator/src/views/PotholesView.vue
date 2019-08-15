@@ -1,18 +1,62 @@
 <template>
   <b-container class="p-5 mt-2 background">
     <b-row>
-      <b-col :cols="showForm ? 6 : 12">
+      <b-col cols="12" md="7" class="mb-2">
         <pothole-map
           class="map"
           @mapClicked="mapClicked($event)"
           :markers="markers"
-          :canReport="canReport"
+          :canReport="inReportingMode"
           :showTempMarker="showTempMarker"
         ></pothole-map>
       </b-col>
-
-      <b-col :cols="showForm ? 6 : 0">
-        <user-form v-if="showForm" v-on:wasCanceled="removeMarker" @submitted="submitted"></user-form>
+      <b-col cols="12" md="5">
+        <div v-if="reportStage === 0">
+          <div v-if="canReport">
+            <b-card>
+              <b-card-header>
+                <strong>Want to report a pothole?</strong>
+              </b-card-header>
+              <b-card-body>
+                <b-button
+                  @click.prevent="reportMode"
+                  variant="primary"
+                  class="mr-4"
+                >Click me to report!</b-button>
+              </b-card-body>
+            </b-card>
+            <b-alert class="mt-4" :show="alertMessage != null" dismissible>{{alertMessage}}</b-alert>
+          </div>
+          <div v-else>
+            <b-card>
+              <b-card-header>
+                <strong>Want to report a pothole?</strong>
+              </b-card-header>
+              <b-card-body>
+                <b-button @click.prevent="goToLogin" variant="primary" class="mr-4 mb-2">Login</b-button>
+                <b-button @click.prevent="goToRegister" variant="primary">Register</b-button>
+              </b-card-body>
+            </b-card>
+          </div>
+        </div>
+        <div v-else-if="reportStage === 1">
+          <b-card>
+            <b-card-header>
+              <strong>Want to report a pothole?</strong>
+            </b-card-header>
+            <b-card-body>
+              <p>Click a location on the map to place a pothole pin</p>
+            </b-card-body>
+          </b-card>
+        </div>
+        <div v-else>
+          <b-card-header>
+            <strong>Want to report a pothole?</strong>
+          </b-card-header>
+          <b-card-body>
+            <user-form @canceled="canceled" @submitted="submitted"></user-form>
+          </b-card-body>
+        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -30,14 +74,13 @@ export default {
   },
   data() {
     return {
-      showDismissibleAlert: true,
+      reportStage: 0,
       showTempMarker: false,
-      showForm: false,
       tempMarker: Object,
       currentUser: Object,
-      rating: "",
-      comments: "",
-      canReport: true
+      canReport: false,
+      inReportingMode: false,
+      alertMessage: null
     };
   },
   components: {
@@ -45,24 +88,42 @@ export default {
     UserForm
   },
   methods: {
+    reportMode() {
+      this.reportStage = 1;
+      this.inReportingMode = true;
+    },
+    goToLogin() {
+      this.$router.push("/login");
+      this.$forceUpdate();
+    },
+    goToRegister() {
+      this.$router.push("/register");
+      this.$forceUpdate();
+    },
     mapClicked(tempMarker) {
       this.tempMarker = {
         latitude: tempMarker.latitude,
         longitude: tempMarker.longitude
       };
       this.showTempMarker = true;
-      this.showForm = true;
+      this.reportStage = 2;
     },
     removeMarker() {
       this.showTempMarker = false;
-      this.showForm = false;
+    },
+    canceled() {
+      this.showTempMarker = false;
+      this.inReportingMode = false;
+      this.reportStage = 0;
+      this.alertMessage = null;
     },
     submitted(formData) {
       const newMarker = {
         latitude: this.tempMarker.latitude,
         longitude: this.tempMarker.longitude,
+
         comments: formData.comments,
-        rating: formData.rating,
+        rating: formData.severity,
         userId: auth.getUser().uid,
         userName: auth.getUser().sub
       };
@@ -74,9 +135,16 @@ export default {
       });
 
       this.markers.push(newMarker);
-      this.showForm = false;
       this.showTempMarker = false;
+      this.inReportingMode = false;
+      this.reportStage = 0;
+      this.alertMessage = "Success: Pothole reported!";
     }
+  },
+  created() {
+    this.canReport =
+      auth.getUser() != null &&
+      (auth.getUser().rol === "user" || auth.getUser().rol === "admin");
   }
 };
 </script>

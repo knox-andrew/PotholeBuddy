@@ -26,9 +26,9 @@
             :to="{name: 'report'}"
           >Report a Pothole</b-nav-item>
           <b-nav-item
+            v-if="isAdmin()"
             :active="active === 'administrator'"
             @click="active = 'administrator'"
-            v-if="isAdmin()"
             :to="{name: 'administrator'}"
           >Admin View</b-nav-item>
         </b-navbar-nav>
@@ -99,6 +99,11 @@ body {
   padding: 0;
   background-image: url("https://i.pinimg.com/originals/5f/c2/9c/5fc29ce899168b5abd2fb8faea9726f4.jpg");
   color: black;
+}
+
+.router-link-exact-active {
+  text-decoration-color: #fff;
+  background-color: rgb(56, 19, 223);
 }
 
 .background {
