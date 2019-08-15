@@ -21,7 +21,6 @@ public class User {
     private String role;
     private long id;
 
-    @Pattern(regexp = "^[\\p{Alnum}]{4,30}$", message="Must be alphanumeric")
     @Size(min=4, max=30, message="Passwords length must be between 4 and 30")
     @NotBlank(message = "Password is required")
     private String password;
