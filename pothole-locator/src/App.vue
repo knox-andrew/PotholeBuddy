@@ -91,8 +91,7 @@ body {
 }
 
 .router-link-exact-active {
-  background-color: rgb(56, 19, 223);
-  border-radius: 10px;
+  font-weight: bold;
 }
 
 .background {

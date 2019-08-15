@@ -6,7 +6,7 @@
                 <b-form-input id="input-live" v-model="repairDate" :state="dateState" type="date" required="true"></b-form-input>
             </b-form-group>
             <b-form-group label="Schedule Repair?">
-                <b-button variant="success" @click.prevent="$emit('submitted', repairDate)">Schedule</b-button>
+                <b-button variant="success" @click.prevent="emitRepairForm(repairDate)">Schedule</b-button>
                 <b-button @click.prevent="$emit('wasCanceled')" variant="danger">Cancel</b-button>
             </b-form-group>
         </b-form>
@@ -27,6 +27,15 @@
             return {
                 center: {lat: 39.151898, lng: -84.4676563},
                 markers: []
+            }
+        },
+        methods: {
+            emitRepairForm(repairDate) {
+                if (repairDate != null) {
+                    this.$emit('submitted', repairDate);
+                } else {
+                    alert('please fill out this field');
+                }
             }
         }
     }
